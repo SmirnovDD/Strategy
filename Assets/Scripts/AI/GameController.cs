@@ -1,0 +1,56 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using TMPro;
+public class GameController : MonoBehaviour
+{
+    public GameObject battleEndedCanvas;
+    public static GameObject battleEndedCanvasStatic;
+    public TextMeshProUGUI teamWonText;
+    public static TextMeshProUGUI teamWonTextStatic;
+
+
+    public static bool battleEnded = false;
+    public static bool battleStarted = false;
+
+    public GameObject grid;
+    public static bool BattleEnded
+    {
+        get { return battleEnded; }
+        set
+        {
+            battleEnded = value; Time.timeScale = 0;
+            battleEndedCanvasStatic.SetActive(true);
+            if (AllUnitsList.allAllies.Count == 0)
+                teamWonTextStatic.text = "YOUR TEAM LOST!";
+            else
+                teamWonTextStatic.text = "YOUR TEAM WON!";
+        }
+    }
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    // called second
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        battleEndedCanvasStatic = battleEndedCanvas;
+        teamWonTextStatic = teamWonText;
+        battleStarted = false;
+        Time.timeScale = 1;
+    }
+
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void StartBattle()
+    {
+        battleStarted = true;
+        grid.SetActive(false);
+    }
+}
