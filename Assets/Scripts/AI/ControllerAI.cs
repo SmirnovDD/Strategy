@@ -10,6 +10,7 @@ public class ControllerAI : MonoBehaviour
     private Transform thisTr;
 
     //MOVEMENT
+    [HideInInspector]
     public Transform targetTr; //позиция врага, к которому движется agent
     [HideInInspector]
     private bool targetSwitched; //вызывается, когда какой то враг становится ближе чем предыдущий, на первом кадре agent.remaining distance не обновляется, так что поставил true, чтобы вызвать метод move

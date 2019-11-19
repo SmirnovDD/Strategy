@@ -39,7 +39,7 @@ ModelImporter:
       takeName: Sword_man_anim_idle
       internalID: 0
       firstFrame: 0
-      lastFrame: 50
+      lastFrame: 300
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
