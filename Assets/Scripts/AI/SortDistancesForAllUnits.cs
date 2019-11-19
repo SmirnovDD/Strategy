@@ -30,7 +30,7 @@ public class SortDistancesForAllUnits : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
-        if(!GameController.BattleEnded) //после конца боя, если оба отряда были уничтожены будет переполнение памяти, т.к. оба списка врагов будут пустыми, если не сделать проверку и не менять переменную
+        if(!GameController.BattleEnded && (AllUnitsList.allAllies.Count != 0 && AllUnitsList.allEnemies.Count != 0)) //после конца боя, если оба отряда были уничтожены будет переполнение памяти, т.к. оба списка врагов будут пустыми, если не сделать проверку и не менять переменную
             StartCoroutine(Start());
     }
 }

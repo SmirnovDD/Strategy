@@ -15,14 +15,24 @@ public class GameController : MonoBehaviour
     public static bool battleEnded = false;
     public static bool battleStarted = false;
 
+    public delegate void BattleStarted();
+    public static BattleStarted OnBattleStarted;
+
     public GameObject grid;
+
+    private void Start()
+    {
+        battleStarted = false;
+        battleEnded = false;
+    }
     public static bool BattleEnded
     {
         get { return battleEnded; }
         set
         {
             battleEnded = value; Time.timeScale = 0;
-            battleEndedCanvasStatic.SetActive(true);
+            if(battleEndedCanvasStatic)
+                battleEndedCanvasStatic.SetActive(true);
             if (AllUnitsList.allAllies.Count == 0)
                 teamWonTextStatic.text = "YOUR TEAM LOST!";
             else
@@ -52,5 +62,7 @@ public class GameController : MonoBehaviour
     {
         battleStarted = true;
         grid.SetActive(false);
+
+        OnBattleStarted?.Invoke();
     }
 }

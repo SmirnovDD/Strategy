@@ -21,7 +21,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 5a8bacb91bfc98542ab9a62932f899d1,
+  m_Motion: {fileID: 3352466662173482948, guid: 19ba72bb514ec9c4ba06efa3f434e9d3,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -74,7 +74,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 5d1f6f3b98164364389190164b5401e7,
+  m_Motion: {fileID: -5999155251543607520, guid: 4bdbb463afd74d441bca45fc641747b9,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -87,7 +87,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TEMP_AI_ANIMATOR
+  m_Name: Pikeman Animator
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: isMoving
@@ -95,13 +95,13 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: attack
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -220,7 +220,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: b58bb54838e9d7c4bac217e5e1ece0f1,
+  m_Motion: {fileID: -8392613521130884938, guid: 8c0bd316780afa4469274b0020b6935d,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 

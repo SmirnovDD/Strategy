@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class ControllerAI : MonoBehaviour
@@ -20,7 +21,9 @@ public class ControllerAI : MonoBehaviour
     //ATTACK
     public float damage;
     private bool canChangeTarget = true; //вызывается, когда персонаж заканчивает анимацию атаки (и в начале), нужна, чтобы не было суеты, когда несколько врагов находятся радом с персонажем, и происходит постоянное переключение между ними
-
+    private UnitHealth attackedUnitHealth;
+    private bool lerpRotationCourutieneRunning;
+    private bool isAttacking; //юнит начал анимацию атаки, но еще не завершил ее
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -28,6 +31,8 @@ public class ControllerAI : MonoBehaviour
     }
     private void OnEnable()
     {
+        GameController.OnBattleStarted += CheckIfThereAreNoEnemies;
+
         if (isPlayerUnit)
         {
             AllUnitsList.allAllies.Add(transform);
@@ -40,8 +45,11 @@ public class ControllerAI : MonoBehaviour
         }
 
     }
+
     private void OnDisable()
     {
+        GameController.OnBattleStarted -= CheckIfThereAreNoEnemies;
+
         if (isPlayerUnit)
         {
             AllUnitsList.allAllies.Remove(transform);
@@ -58,18 +66,31 @@ public class ControllerAI : MonoBehaviour
         }
     }
 
+    private void CheckIfThereAreNoEnemies()
+    {
+        if (isPlayerUnit)
+        {
+            if (AllUnitsList.allEnemies.Count == 0)
+                GameController.BattleEnded = true;
+        }
+        else
+        {
+            if (AllUnitsList.allAllies.Count == 0)
+                GameController.BattleEnded = true;
+        }
+    }
+
     void FixedUpdate()
     {
-        if (!GameController.battleStarted)
+        if (!GameController.battleStarted || GameController.BattleEnded)
+        {
             return;
-
+        }
         if (!targetTr)
         {
             targetTr = SortEnemiesByDistance.SortEnemies(isPlayerUnit, thisTr.position);
             targetSwitched = true;
         }
-        if (gameObject.name == "test")
-            Debug.DrawLine(thisTr.position, targetTr.position, Color.red);
 
         if (agent.remainingDistance == 0)
         {
@@ -87,24 +108,45 @@ public class ControllerAI : MonoBehaviour
         }
         else
         {
-            if (targetTr)
+            if (targetTr && !isAttacking)
             {
                 canChangeTarget = false;
-                thisTr.LookAt(targetTr);
-                anim.SetBool("isMoving", false);
+
+                anim.SetBool("isMoving", false);                
                 anim.SetBool("attack", true);
+
+                if (!lerpRotationCourutieneRunning)
+                    StartCoroutine(LerpRotationToFaceTarget());
+
+                attackedUnitHealth = targetTr.gameObject.GetComponent<UnitHealth>(); //запоминаем, кого атаковали во время начала анимации
+
+                isAttacking = true;
             }
+        }
+    }
+
+    public IEnumerator LerpRotationToFaceTarget()
+    {
+        lerpRotationCourutieneRunning = true;
+        float lerpPercent = 0;
+        while(targetTr)
+        {
+            lerpPercent += 0.1f * Time.deltaTime;
+            thisTr.rotation = Quaternion.Lerp(thisTr.rotation, Quaternion.LookRotation(targetTr.position - thisTr.position, Vector3.up), lerpPercent);
+            yield return new WaitForFixedUpdate();
         }
     }
 
     public void Attack() //вызывается из события в анимации
     {
-        if (isPlayerUnit && AllUnitsList.allEnemies.Count > 0)
-            DealDamageToEnemy.DealDamage(AllUnitsList.allEnemies[0].gameObject.GetComponent<UnitHealth>(), damage);
-        else if(!isPlayerUnit && AllUnitsList.allAllies.Count > 0)
-            DealDamageToEnemy.DealDamage(AllUnitsList.allAllies[0].gameObject.GetComponent<UnitHealth>(), damage);
+        if (attackedUnitHealth)
+            DealDamageToEnemy.DealDamage(attackedUnitHealth, damage);
 
         canChangeTarget = true;
+
+        StopCoroutine(LerpRotationToFaceTarget());
+
+        isAttacking = false;
     }
 
     public void UpdateTarget()
