@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: fba516a638c05be42905cdb57a440a07
+guid: 1bc622152df35c64481272f75ef45800
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:
   - first:
-      74: 2375503970824538519
-    second: Horse_man_standing
+      74: -6358751122418882662
+    second: Horse_man_anim_attack
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -26,7 +26,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -35,11 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Horse_man_standing
-      takeName: Horse_man_standing
+      name: Horse_man_anim_attack
+      takeName: Horse_man_anim_attack
       internalID: 0
       firstFrame: 0
-      lastFrame: 40
+      lastFrame: 25
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -116,7 +116,7 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 1
+    hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
