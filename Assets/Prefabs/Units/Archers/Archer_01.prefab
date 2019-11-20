@@ -804,6 +804,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 253bf2ec1a124f64bacea651831d064b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitRagdoll: {fileID: 2239792041178083985, guid: 9da0a4e2b7b2e0043a0d4319553b4eee,
+    type: 3}
   startingHP: 90
 --- !u!114 &375124977445381574
 MonoBehaviour:
