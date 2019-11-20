@@ -9,7 +9,7 @@ public class ArcherShoot : MonoBehaviour
     public Transform shootPoint;
     public void Shoot()
     {
-        GameObject newArrow = Instantiate(arrowPrefab, shootPoint.transform.position, Quaternion.LookRotation(transform.forward));
+        GameObject newArrow = Instantiate(arrowPrefab, shootPoint.transform.position, Quaternion.LookRotation(shootPoint.forward));
         newArrow.GetComponent<ArrowFlight>().damage = damage;
     }
 }
