@@ -1106,6 +1106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfcc7442dae8b3f488383b1577099348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitType: 0
   isPlayerUnit: 1
   targetTr: {fileID: 0}
   anim: {fileID: 1260906425709109351}
@@ -1122,6 +1123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 253bf2ec1a124f64bacea651831d064b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitRagdoll: {fileID: 3923712832432006864, guid: c951714e65453b141a0d1be584c59adb,
+    type: 3}
   startingHP: 150
 --- !u!1 &6037077151055039033
 GameObject:

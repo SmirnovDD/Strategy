@@ -308,6 +308,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 253bf2ec1a124f64bacea651831d064b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitRagdoll: {fileID: 3703499230349649216, guid: 6b71c40b0ccecb443999b9f5ef66cdb0,
+    type: 3}
   startingHP: 100
 --- !u!1 &2538912829229078762
 GameObject:
