@@ -3,7 +3,13 @@ guid: a79367a7b3d241f4599d495e1b0e0756
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SwordMan
+    second: {fileID: 8552051288484607115, guid: a79367a7b3d241f4599d495e1b0e0756,
+      type: 3}
   materials:
     importMaterials: 1
     materialName: 0
