@@ -16,7 +16,6 @@ public class ArrowFlight : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         bool isEnemy = !other.GetComponent<ControllerAI>().isPlayerUnit;
-        Debug.Log(other.gameObject.name);
         if (isEnemy)
         {
             Destroy(rigidB);
