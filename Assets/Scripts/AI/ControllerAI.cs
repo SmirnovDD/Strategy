@@ -5,6 +5,14 @@ using System.Collections;
 [RequireComponent(typeof(NavMeshAgent))]
 public class ControllerAI : MonoBehaviour
 {
+
+    public enum UnitType
+    {
+        melee,
+        archer
+    }
+    public UnitType unitType;
+
     public bool isPlayerUnit;
     private NavMeshAgent agent;
     private Transform thisTr;
@@ -25,10 +33,16 @@ public class ControllerAI : MonoBehaviour
     private UnitHealth attackedUnitHealth;
     private bool lerpRotationCourutieneRunning;
     private bool isAttacking; //юнит начал анимацию атаки, но еще не завершил ее
+    private ArcherShoot archerShootS;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         thisTr = transform;
+
+        if(unitType == UnitType.archer)
+        {
+            archerShootS = GetComponent<ArcherShoot>();
+        }
     }
     private void OnEnable()
     {
@@ -140,8 +154,15 @@ public class ControllerAI : MonoBehaviour
 
     public void Attack() //вызывается из события в анимации
     {
-        if (attackedUnitHealth)
-            DealDamageToEnemy.DealDamage(attackedUnitHealth, damage);
+        if (unitType == UnitType.archer)
+        {
+            archerShootS.Shoot();
+        }
+        else
+        {
+            if (attackedUnitHealth)
+                DealDamageToEnemy.DealDamage(attackedUnitHealth, damage);
+        }
 
         canChangeTarget = true;
 
