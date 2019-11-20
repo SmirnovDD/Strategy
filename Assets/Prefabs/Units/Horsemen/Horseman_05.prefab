@@ -1109,7 +1109,7 @@ GameObject:
   - component: {fileID: 1600956837865983248}
   - component: {fileID: 1600956837865983249}
   m_Layer: 0
-  m_Name: Horseman_02 (1)
+  m_Name: Horseman_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1215,6 +1215,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 253bf2ec1a124f64bacea651831d064b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitRagdoll: {fileID: 2096921454225260686, guid: b75f62464f0e46b498db2c24ebd06d70,
+    type: 3}
   startingHP: 150
 --- !u!1 &6969814699482836618
 GameObject:

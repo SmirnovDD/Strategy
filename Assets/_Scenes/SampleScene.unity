@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.03287866, g: 0.49357933, b: 1.5179149, a: 1}
+  m_IndirectSpecularColor: {r: 0.033429418, g: 0.49364355, b: 1.5069733, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -213,7 +213,7 @@ RectTransform:
   - {fileID: 669209935}
   - {fileID: 856977021}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -828,7 +828,7 @@ Transform:
   - {fileID: 124365488}
   - {fileID: 267091566}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &319811479
 GameObject:
@@ -853,7 +853,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 319811479}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -864,8 +864,8 @@ Transform:
   - {fileID: 869355323}
   - {fileID: 1356089097}
   - {fileID: 681052626}
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 2104152797}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &320814158 stripped
 Transform:
@@ -1556,7 +1556,7 @@ RectTransform:
   m_Children:
   - {fileID: 629345236}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2774,7 +2774,7 @@ PrefabInstance:
     - target: {fileID: 4633644242180021656, guid: b6995e4f76529e64d97e46c44224eeb1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.36
+      value: -14.36
       objectReference: {fileID: 0}
     - target: {fileID: 4633644242180021656, guid: b6995e4f76529e64d97e46c44224eeb1,
         type: 3}
@@ -2988,7 +2988,7 @@ PrefabInstance:
     - target: {fileID: 7487246588427932506, guid: a6b490715a8635a49ba911a6c75903f9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.32
+      value: -14.32
       objectReference: {fileID: 0}
     - target: {fileID: 7487246588427932506, guid: a6b490715a8635a49ba911a6c75903f9,
         type: 3}
@@ -3251,9 +3251,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 319811480}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2138677391
 GameObject:

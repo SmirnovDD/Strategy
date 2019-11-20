@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 1551229291}
   - component: {fileID: 1551229292}
   m_Layer: 0
-  m_Name: Swordsman
+  m_Name: Swordsman_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -322,6 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfcc7442dae8b3f488383b1577099348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitType: 0
   isPlayerUnit: 1
   targetTr: {fileID: 0}
   anim: {fileID: 8272211898218191730}
@@ -338,6 +339,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 253bf2ec1a124f64bacea651831d064b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitRagdoll: {fileID: 2751969057227484976, guid: 449b3686ab7d1a0438149f6b2c5511c0,
+    type: 3}
   startingHP: 100
 --- !u!1 &3111267893445048642
 GameObject:
