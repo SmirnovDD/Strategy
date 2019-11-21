@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.18154702, g: 0.22719009, b: 0.30740646, a: 1}
+  m_IndirectSpecularColor: {r: 0.18154675, g: 0.22718969, b: 0.3074058, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4941,6 +4941,11 @@ MonoBehaviour:
   - {fileID: 8194250782355852256, guid: 9728633686520094497597d4edd02720, type: 3}
   - {fileID: 1723387656995904775, guid: bef77fb576c3e3247997b571aadaa6a3, type: 3}
   - {fileID: 6888612339640220474, guid: c5b1b1e85b3052246974baa10d3877d9, type: 3}
+  buyUnitsButtonsImages: []
+  pikemenBtnSprites: []
+  swordsmenBtnSprites: []
+  archersBtnSprites: []
+  horsemenBtnSprites: []
   cellsUnitCheckScripts:
   - {fileID: 6238947930336522836}
   - {fileID: 6238947930336522835}
