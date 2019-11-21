@@ -72,7 +72,6 @@ public class GridPlacement : MonoBehaviour
                         {
                             if (movedUnit)
                             {
-                                Debug.Log(1);
                                 selectedUnit = null;
                                 movedUnit = false;
                             }
