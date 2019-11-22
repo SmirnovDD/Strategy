@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class OpenAndCloseUnitPanel : MonoBehaviour
 {
-    public GameObject[] unitsBuyPanel;
-
+    public GameObject unitsBuyPanel;
+    public Sprite[] btnSprites;
     private Image btnImage;
     private void Start()
     {
@@ -15,15 +15,17 @@ public class OpenAndCloseUnitPanel : MonoBehaviour
 
     public void OpenOrClosePanel()
     {
-        if (unitsBuyPanel[0].activeSelf)
+        if (unitsBuyPanel.activeSelf)
         {
-            unitsBuyPanel[0].SetActive(false);
-            unitsBuyPanel[1].SetActive(false);
+            unitsBuyPanel.SetActive(false);
+
+            btnImage.sprite = btnSprites[0];
         }
         else
         {
-            unitsBuyPanel[0].SetActive(true);
-            unitsBuyPanel[1].SetActive(true);
+            unitsBuyPanel.SetActive(true);
+
+            btnImage.sprite = btnSprites[1];
         }
     }
 }

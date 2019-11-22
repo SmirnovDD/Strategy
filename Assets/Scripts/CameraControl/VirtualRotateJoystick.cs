@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-public class VirtualRotateJoystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
+public class VirtualRotateJoystick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     private Canvas gameCanvas;
     [HideInInspector]
@@ -14,6 +14,8 @@ public class VirtualRotateJoystick : MonoBehaviour, IDragHandler, IPointerDownHa
     public Vector3 InputDirection { get; set; }
     [HideInInspector]
     public Vector3 startTouch = Vector2.zero;
+
+    public bool touchBeganOutsideUI;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,7 +58,7 @@ public class VirtualRotateJoystick : MonoBehaviour, IDragHandler, IPointerDownHa
 //            transform.position = defaultPos;
 //        }
 //#elif UNITY_ANDROID
-        if(Input.touchCount > 0)
+        if(Input.touchCount == 1)
         {
             //if (Input.GetTouch(0).phase == TouchPhase.Began && Time.timeScale != 0)
             //{
@@ -84,32 +86,95 @@ public class VirtualRotateJoystick : MonoBehaviour, IDragHandler, IPointerDownHa
                 startTouch = Vector3.zero;
                 joystickImg.rectTransform.anchoredPosition = Vector3.zero;
                 transform.position = defaultPos;
+                touchBeganOutsideUI = false;
             }
         }
-//#endif
-
-    }
-
-    public virtual void OnDrag(PointerEventData ped)
-    {
-        Vector2 pos = Vector2.zero;
-        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(bgImg.rectTransform, ped.position, ped.pressEventCamera, out pos))
+        else if (Input.touchCount == 2)
         {
-            pos.x = (pos.x / bgImg.rectTransform.sizeDelta.x);
-            pos.y = (pos.y / bgImg.rectTransform.sizeDelta.y);
+            //if (Input.GetTouch(0).phase == TouchPhase.Began && Time.timeScale != 0)
+            //{
+            //    if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+            //    {
+            //        transform.position = (Vector3)Input.GetTouch(0).position - Vector3.right * bgImg.rectTransform.sizeDelta.x / 2 * scaleFactor + Vector3.down * bgImg.rectTransform.sizeDelta.y / 2 * scaleFactor;
+            //        startTouch = Input.GetTouch(0).position;
+            //    }
+            //}
+            if (!touchBeganOutsideUI)
+            {
+                if (startTouch != Vector3.zero && Input.GetTouch(1).phase == TouchPhase.Moved)
+                {
+                    Vector2 pos = Input.GetTouch(1).position - (Vector2)transform.position;
+                    pos.x = (pos.x / bgImg.rectTransform.sizeDelta.x);
+                    pos.y = (pos.y / bgImg.rectTransform.sizeDelta.y);
 
-            float x = (bgImg.rectTransform.pivot.x == 1) ? pos.x * 2 + 1 : pos.x * 2 - 1;
-            float y = (bgImg.rectTransform.pivot.y == 1) ? pos.y * 2 + 1 : pos.y * 2 - 1;
+                    float x = (bgImg.rectTransform.pivot.x == 1) ? pos.x * 2 + 1 : pos.x * 2 - 1;
+                    float y = (bgImg.rectTransform.pivot.y == 1) ? pos.y * 2 + 1 : pos.y * 2 - 1;
 
-            InputDirection = new Vector3(x, 0, y);
-            InputDirection = (InputDirection.magnitude > 1) ? InputDirection.normalized : InputDirection;
-            joystickImg.rectTransform.anchoredPosition = new Vector3(InputDirection.x * (bgImg.rectTransform.sizeDelta.x / 3), InputDirection.z * (bgImg.rectTransform.sizeDelta.y / 3));
+                    InputDirection = new Vector3(x, 0, y);
+                    InputDirection = (InputDirection.magnitude > 1) ? InputDirection.normalized : InputDirection;
+                    joystickImg.rectTransform.anchoredPosition = new Vector3(InputDirection.x * (bgImg.rectTransform.sizeDelta.x / 3), InputDirection.z * (bgImg.rectTransform.sizeDelta.y / 3));
+                }
+                else if (Input.GetTouch(1).phase == TouchPhase.Ended || Input.GetTouch(1).phase == TouchPhase.Canceled)
+                {
+                    startTouch = Vector3.zero;
+                    joystickImg.rectTransform.anchoredPosition = Vector3.zero;
+                    transform.position = defaultPos;
+                }
+            }
+            else
+            {
+                if (startTouch != Vector3.zero && Input.GetTouch(0).phase == TouchPhase.Moved)
+                {
+                    Debug.Log("VEE ARE HERE");
+                    Vector2 pos = Input.GetTouch(0).position - (Vector2)transform.position;
+                    pos.x = (pos.x / bgImg.rectTransform.sizeDelta.x);
+                    pos.y = (pos.y / bgImg.rectTransform.sizeDelta.y);
+
+                    float x = (bgImg.rectTransform.pivot.x == 1) ? pos.x * 2 + 1 : pos.x * 2 - 1;
+                    float y = (bgImg.rectTransform.pivot.y == 1) ? pos.y * 2 + 1 : pos.y * 2 - 1;
+
+                    InputDirection = new Vector3(x, 0, y);
+                    InputDirection = (InputDirection.magnitude > 1) ? InputDirection.normalized : InputDirection;
+                    joystickImg.rectTransform.anchoredPosition = new Vector3(InputDirection.x * (bgImg.rectTransform.sizeDelta.x / 3), InputDirection.z * (bgImg.rectTransform.sizeDelta.y / 3));
+                }
+                else if (Input.GetTouch(0).phase == TouchPhase.Ended || Input.GetTouch(0).phase == TouchPhase.Canceled)
+                {
+                    startTouch = Vector3.zero;
+                    joystickImg.rectTransform.anchoredPosition = Vector3.zero;
+                    transform.position = defaultPos;
+                    touchBeganOutsideUI = false;
+                }
+            }
         }
+
+        //#endif
+
     }
+
+    //public virtual void OnDrag(PointerEventData ped)
+    //{
+    //    Vector2 pos = Vector2.zero;
+    //    if (RectTransformUtility.ScreenPointToLocalPointInRectangle(bgImg.rectTransform, ped.position, ped.pressEventCamera, out pos))
+    //    {
+    //        pos.x = (pos.x / bgImg.rectTransform.sizeDelta.x);
+    //        pos.y = (pos.y / bgImg.rectTransform.sizeDelta.y);
+
+    //        float x = (bgImg.rectTransform.pivot.x == 1) ? pos.x * 2 + 1 : pos.x * 2 - 1;
+    //        float y = (bgImg.rectTransform.pivot.y == 1) ? pos.y * 2 + 1 : pos.y * 2 - 1;
+
+    //        InputDirection = new Vector3(x, 0, y);
+    //        InputDirection = (InputDirection.magnitude > 1) ? InputDirection.normalized : InputDirection;
+    //        joystickImg.rectTransform.anchoredPosition = new Vector3(InputDirection.x * (bgImg.rectTransform.sizeDelta.x / 3), InputDirection.z * (bgImg.rectTransform.sizeDelta.y / 3));
+    //    }
+    //}
 
     public virtual void OnPointerDown(PointerEventData ped)
     {
-        OnDrag(ped);
+        if(Input.touchCount == 1)
+        {
+            startTouch = Input.GetTouch(0).position;
+        }
+        //OnDrag(ped);
     }
 
     public virtual void OnPointerUp(PointerEventData ped)
