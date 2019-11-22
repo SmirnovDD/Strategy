@@ -99,8 +99,17 @@ public class VirtualRotateJoystick : MonoBehaviour, IPointerDownHandler, IPointe
             //        startTouch = Input.GetTouch(0).position;
             //    }
             //}
+
             if (!touchBeganOutsideUI)
             {
+                //if (Input.GetTouch(1).phase == TouchPhase.Began)
+                //{
+                //    if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(1).fingerId))
+                //    {
+                //        transform.position = (Vector3)Input.GetTouch(0).position - Vector3.right * bgImg.rectTransform.sizeDelta.x / 2 * scaleFactor + Vector3.down * bgImg.rectTransform.sizeDelta.y / 2 * scaleFactor;
+                //        startTouch = Input.GetTouch(1).position;
+                //    }
+                //}
                 if (startTouch != Vector3.zero && Input.GetTouch(1).phase == TouchPhase.Moved)
                 {
                     Vector2 pos = Input.GetTouch(1).position - (Vector2)transform.position;
@@ -125,7 +134,6 @@ public class VirtualRotateJoystick : MonoBehaviour, IPointerDownHandler, IPointe
             {
                 if (startTouch != Vector3.zero && Input.GetTouch(0).phase == TouchPhase.Moved)
                 {
-                    Debug.Log("VEE ARE HERE");
                     Vector2 pos = Input.GetTouch(0).position - (Vector2)transform.position;
                     pos.x = (pos.x / bgImg.rectTransform.sizeDelta.x);
                     pos.y = (pos.y / bgImg.rectTransform.sizeDelta.y);

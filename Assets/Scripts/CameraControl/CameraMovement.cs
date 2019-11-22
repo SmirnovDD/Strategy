@@ -19,6 +19,8 @@ public class CameraMovement : MonoBehaviour
 
     private bool rotationTouchWasFirst;
     private bool isRotating;
+
+    private bool setTouchPhaseManualyToBegan;
     private void Start()
     {
         Vector3 euler = transform.eulerAngles;
@@ -67,7 +69,7 @@ public class CameraMovement : MonoBehaviour
                 rotateJoystick.startTouch = Vector3.zero;
                 rotateJoystick.joystickImg.rectTransform.anchoredPosition = Vector3.zero;
                 rotateJoystick.InputDirection = Vector3.zero;
-                rotateJoystick.gameObject.SetActive(false);
+                //rotateJoystick.gameObject.SetActive(false);
                 registerRotationTouch = false;
                 rotationTouchWasFirst = false;
 
@@ -78,9 +80,10 @@ public class CameraMovement : MonoBehaviour
         {
             if (!rotationTouchWasFirst)
             {
-                if (moveJoystick.isMoving && !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(1).fingerId) && Input.GetTouch(1).phase == TouchPhase.Began)
+                if (moveJoystick.isMoving && !setTouchPhaseManualyToBegan)
                 {
-                    rotateJoystick.gameObject.SetActive(true);
+                    //rotateJoystick.gameObject.SetActive(true);
+                    setTouchPhaseManualyToBegan = true;
                     rotateJoystick.gameObject.transform.position = (Vector3)Input.GetTouch(1).position - (Vector3.right * rotateJoystick.bgImg.rectTransform.sizeDelta.x / 2 * rotateJoystick.scaleFactor)
                                                                     + (Vector3.down * rotateJoystick.bgImg.rectTransform.sizeDelta.y / 2 * rotateJoystick.scaleFactor);
                     rotateJoystick.startTouch = Input.GetTouch(1).position;
@@ -96,8 +99,9 @@ public class CameraMovement : MonoBehaviour
                     rotateJoystick.startTouch = Vector3.zero;
                     rotateJoystick.joystickImg.rectTransform.anchoredPosition = Vector3.zero;
                     rotateJoystick.InputDirection = Vector3.zero;
-                    rotateJoystick.gameObject.SetActive(false);
+                    //rotateJoystick.gameObject.SetActive(false);
 
+                    setTouchPhaseManualyToBegan = false;
                     isRotating = false;
                 }
             }
@@ -117,7 +121,7 @@ public class CameraMovement : MonoBehaviour
                     rotateJoystick.startTouch = Vector3.zero;
                     rotateJoystick.joystickImg.rectTransform.anchoredPosition = Vector3.zero;
                     rotateJoystick.InputDirection = Vector3.zero;
-                    rotateJoystick.gameObject.SetActive(false);
+                    //rotateJoystick.gameObject.SetActive(false);
                     registerRotationTouch = false;
                     rotationTouchWasFirst = false;
 
@@ -193,7 +197,7 @@ public class CameraMovement : MonoBehaviour
             rotationTouchWasFirst = true;
             rotateJoystick.touchBeganOutsideUI = true;
 
-            rotateJoystick.gameObject.SetActive(true);
+            //rotateJoystick.gameObject.SetActive(true);
             rotateJoystick.gameObject.transform.position = (Vector3)Input.GetTouch(0).position - (Vector3.right * rotateJoystick.bgImg.rectTransform.sizeDelta.x / 2 * rotateJoystick.scaleFactor)
                                                             + (Vector3.down * rotateJoystick.bgImg.rectTransform.sizeDelta.y / 2 * rotateJoystick.scaleFactor);
             rotateJoystick.startTouch = Input.GetTouch(0).position;
