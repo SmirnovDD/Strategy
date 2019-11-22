@@ -6766,7 +6766,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitRagdoll: {fileID: 0}
-  startingHP: 100
+  startingHP: 10000
 --- !u!195 &626554935
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -7789,7 +7789,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.41164446, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.41164446, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -9853,7 +9853,7 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 1551229292, guid: a3f9796a895dccd4993c4dceb5b3fce6, type: 3}
       propertyPath: startingHP
-      value: 100
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 1998505096574997646, guid: a3f9796a895dccd4993c4dceb5b3fce6,
         type: 3}
@@ -12320,7 +12320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.4940877, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.4940877, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
