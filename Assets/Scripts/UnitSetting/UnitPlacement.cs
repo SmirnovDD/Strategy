@@ -44,6 +44,7 @@ public class UnitPlacement : MonoBehaviour
     public void SelectUnitType(int typeIndex)
     {
         currentSelectedUnitType = typeIndex;
+
         if(typeIndex == 0)
         {
             for(int i = 0; i < buyUnitsButtonsImages.Length; i++)
