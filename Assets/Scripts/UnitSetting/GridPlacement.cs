@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GridPlacement : MonoBehaviour
 {
+    public VirtualJoystick movementJoystick;
     public LayerMask layerMask;
     public RegisterUnitsInGrids[] allCellsScripts;
 
@@ -55,7 +57,7 @@ public class GridPlacement : MonoBehaviour
                 Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
                 RaycastHit hit;
                 Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask);
-                if (hit.collider)
+                if (hit.collider && !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
                 {
                     int index = int.Parse(hit.collider.name);
 
