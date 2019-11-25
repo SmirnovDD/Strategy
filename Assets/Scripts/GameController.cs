@@ -6,6 +6,28 @@ using UnityEngine.SceneManagement;
 using TMPro;
 public class GameController : MonoBehaviour
 {
+    public int MoneyAmount
+    {
+        get { return moneyAmount; }
+        set
+        {
+            moneyAmount = value;
+            moneyAmountText.text = moneyAmount.ToString();
+        }
+    }
+    public int UnitLimit
+    {
+        get { return unitLimit; }
+        set
+        {
+            unitLimit = value;
+            unitLimitAmountText.text = unitLimit.ToString();
+        }
+    }
+    private int moneyAmount;
+    private int unitLimit;
+
+    public TextMeshProUGUI moneyAmountText, unitLimitAmountText;
     public GameObject battleEndedCanvas;
     public static GameObject battleEndedCanvasStatic;
     public TextMeshProUGUI teamWonText;
@@ -24,6 +46,9 @@ public class GameController : MonoBehaviour
     {
         battleStarted = false;
         battleEnded = false;
+
+        MoneyAmount = LevelsData.levelsMoneyLimits[SceneManager.GetActiveScene().buildIndex]; // !!!!!!!!!!!!!!!!!!! BUILD INDEX - 1 КОГДА БУДЕТ МЕНЮ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        UnitLimit = LevelsData.levelsUnitsLimits[SceneManager.GetActiveScene().buildIndex]; // !!!!!!!!!!!!!!!!!!! BUILD INDEX - 1 КОГДА БУДЕТ МЕНЮ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
     public static bool BattleEnded
     {

@@ -69,14 +69,14 @@ public class ControllerAI : MonoBehaviour
         {
             AllUnitsList.allAllies.Remove(transform);
             AllUnitsList.allAlliesControllers.Remove(this);
-            if (AllUnitsList.allAllies.Count == 0)
+            if (AllUnitsList.allAllies.Count == 0 && GameController.battleStarted)
                 GameController.BattleEnded = true;
         }
         else
         {
             AllUnitsList.allEnemies.Remove(transform);
             AllUnitsList.allEnemiesControllers.Remove(this);
-            if (AllUnitsList.allEnemies.Count == 0)
+            if (AllUnitsList.allEnemies.Count == 0 && GameController.battleStarted)
                 GameController.BattleEnded = true;
         }
     }

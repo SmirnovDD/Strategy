@@ -1108,6 +1108,7 @@ GameObject:
   - component: {fileID: 1600956837865983255}
   - component: {fileID: 1600956837865983248}
   - component: {fileID: 1600956837865983249}
+  - component: {fileID: 2072377504867837807}
   m_Layer: 0
   m_Name: Horseman_05
   m_TagString: Untagged
@@ -1218,6 +1219,20 @@ MonoBehaviour:
   unitRagdoll: {fileID: 2096921454225260686, guid: b75f62464f0e46b498db2c24ebd06d70,
     type: 3}
   startingHP: 150
+--- !u!114 &2072377504867837807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6888612339640220474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067c51544a1ce7247824fa0c023ec6ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 0
+  limitCost: 0
 --- !u!1 &6969814699482836618
 GameObject:
   m_ObjectHideFlags: 0

@@ -201,6 +201,7 @@ GameObject:
   - component: {fileID: 581376043274387650}
   - component: {fileID: 581376043274387651}
   - component: {fileID: 581376043274387652}
+  - component: {fileID: -5417890132319082510}
   m_Layer: 0
   m_Name: Swordsman_04
   m_TagString: Untagged
@@ -311,6 +312,20 @@ MonoBehaviour:
   unitRagdoll: {fileID: 3703499230349649216, guid: 6b71c40b0ccecb443999b9f5ef66cdb0,
     type: 3}
   startingHP: 100
+--- !u!114 &-5417890132319082510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2453582823097066931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067c51544a1ce7247824fa0c023ec6ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 0
+  limitCost: 0
 --- !u!1 &2538912829229078762
 GameObject:
   m_ObjectHideFlags: 0
