@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 3537278225428002911}
   - component: {fileID: 3537278225428002908}
   - component: {fileID: 3537278225428002909}
+  - component: {fileID: -6926949353751254514}
   m_Layer: 0
   m_Name: Pikeman_05
   m_TagString: Untagged
@@ -216,6 +217,20 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-6926949353751254514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406337059945630763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067c51544a1ce7247824fa0c023ec6ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 0
+  limitCost: 0
 --- !u!1 &1442392594488232259
 GameObject:
   m_ObjectHideFlags: 0

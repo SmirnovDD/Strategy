@@ -735,6 +735,7 @@ GameObject:
   - component: {fileID: 375124977445381574}
   - component: {fileID: 375124977445381569}
   - component: {fileID: 375124977445381571}
+  - component: {fileID: 2137032213555212875}
   m_Layer: 0
   m_Name: Archer_01
   m_TagString: Untagged
@@ -862,6 +863,20 @@ MonoBehaviour:
   arrowPrefab: {fileID: 1723045615479757360, guid: cef5c4ec0e6dd3b4785de79bd42ee18d,
     type: 3}
   shootPoint: {fileID: 375124977635772582}
+--- !u!114 &2137032213555212875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508807382921015179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067c51544a1ce7247824fa0c023ec6ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 0
+  limitCost: 0
 --- !u!1 &8585475438596887250
 GameObject:
   m_ObjectHideFlags: 0

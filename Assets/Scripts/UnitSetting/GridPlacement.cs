@@ -2,21 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-
+using UnityEngine.UI;
 public class GridPlacement : MonoBehaviour
 {
+    public GameObject removeUnitButton;
+    public GameObject unitToPlace;// выставляется из UnitPlacement скрипта при нажатии кнопки, ставим на свободную клетку
     public VirtualJoystick movementJoystick;
     public LayerMask layerMask;
     public RegisterUnitsInGrids[] allCellsScripts;
 
-    private GameObject selectedUnit;
+    [HideInInspector]
+    public GameObject selectedUnit;
     private Transform selectedCellTr;
+    [HideInInspector]
+    public bool movedUnit;
+    private GameObject lastSelectedUnit;
+    [HideInInspector]
+    public int unitPlaceButtonIndex; //из UnitPlacement
+    [HideInInspector]
+    public int unitLimit; //из UnitPlacement
 
-    private bool movedUnit;
+    private GameController gc;
+    private UnitPlacement up;
     // Start is called before the first frame update
     void Start()
     {
-        
+        gc = GetComponent<GameController>();
+        up = GetComponent<UnitPlacement>();
     }
 
     // Update is called once per frame
@@ -24,34 +36,43 @@ public class GridPlacement : MonoBehaviour
     {
        if(!GameController.battleStarted)
        {
-//#if UNITY_EDITOR
-//            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-//            RaycastHit hit;
-//            Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask);
-//            if (hit.collider)
-//            {
-//                int index = int.Parse(hit.collider.name);
+            if (lastSelectedUnit == null)
+            {
+                removeUnitButton.gameObject.SetActive(false);
+            }
+            else
+            {
+                removeUnitButton.gameObject.SetActive(true);
+            }
 
-//                if (allCellsScripts[index].collidingObject)
-//                {
-//                    if (Input.GetMouseButtonDown(0))
-//                    {
-//                        if (!selectedUnit)
-//                            selectedUnit = allCellsScripts[index].collidingObject;
-//                        else
-//                            selectedUnit = null;
-//                    }
-//                }
-//                else
-//                {
-//                    if(selectedUnit && !allCellsScripts[index].collidingObject)
-//                    {
-//                        selectedCellTr = allCellsScripts[index].gameObject.transform;
-//                        selectedUnit.transform.position = new Vector3(selectedCellTr.position.x, selectedUnit.transform.position.y, selectedCellTr.position.z);
-//                    }
-//                }
-//            }
-//#elif UNITY_ANDROID
+            //#if UNITY_EDITOR
+            //            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            //            RaycastHit hit;
+            //            Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask);
+            //            if (hit.collider)
+            //            {
+            //                int index = int.Parse(hit.collider.name);
+
+            //                if (allCellsScripts[index].collidingObject)
+            //                {
+            //                    if (Input.GetMouseButtonDown(0))
+            //                    {
+            //                        if (!selectedUnit)
+            //                            selectedUnit = allCellsScripts[index].collidingObject;
+            //                        else
+            //                            selectedUnit = null;
+            //                    }
+            //                }
+            //                else
+            //                {
+            //                    if(selectedUnit && !allCellsScripts[index].collidingObject)
+            //                    {
+            //                        selectedCellTr = allCellsScripts[index].gameObject.transform;
+            //                        selectedUnit.transform.position = new Vector3(selectedCellTr.position.x, selectedUnit.transform.position.y, selectedCellTr.position.z);
+            //                    }
+            //                }
+            //            }
+            //#elif UNITY_ANDROID
             if (Input.touchCount > 0)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
@@ -66,7 +87,10 @@ public class GridPlacement : MonoBehaviour
                         if (Input.GetTouch(0).phase == TouchPhase.Began) //|| Input.GetTouch(0).phase == TouchPhase.Moved)
                         {
                             if (!selectedUnit)
+                            {
                                 selectedUnit = allCellsScripts[index].collidingObject;
+                                lastSelectedUnit = selectedUnit;
+                            }
                             else
                                 selectedUnit = null;
                         }
@@ -93,6 +117,37 @@ public class GridPlacement : MonoBehaviour
                             selectedCellTr = hit.collider.transform;
                             selectedUnit.transform.position = new Vector3(selectedCellTr.position.x, selectedUnit.transform.position.y, selectedCellTr.position.z);
                         }
+                        else
+                        {
+                            if (Input.GetTouch(0).phase == TouchPhase.Began && unitToPlace)
+                            {
+                                selectedCellTr = hit.collider.transform;
+                                GameObject newUnit = Instantiate(unitToPlace, new Vector3(selectedCellTr.position.x, -0.1606905f, selectedCellTr.position.z), Quaternion.identity);
+
+                                UnitCost unitCost = newUnit.GetComponent<UnitCost>();
+                                unitCost.cost = up.unitsCosts[unitPlaceButtonIndex];
+                                unitCost.limitCost = unitLimit;
+
+                                gc.MoneyAmount -= up.unitsCosts[unitPlaceButtonIndex];
+                                gc.UnitLimit -= unitLimit;
+
+                                up.placedUnits.Add(newUnit);
+                                selectedUnit = newUnit;
+                                lastSelectedUnit = newUnit;
+                                unitToPlace = null;
+
+                                foreach (Animator anim in up.placeUnitsButtonsAnimators)
+                                {
+                                    anim.SetBool("flicker", false);
+                                }
+
+                                up.removeAllUnitsButton.GetComponent<Button>().interactable = true;
+                                removeUnitButton.GetComponent<Button>().interactable = true;
+
+                                up.SelectUnitType(0);
+                                up.placingUnit = false;
+                            }
+                        }
                     }
                 }
                 else
@@ -106,5 +161,17 @@ public class GridPlacement : MonoBehaviour
             }
 //#endif
         }
+    }
+
+    public void RemoveUnit()
+    {
+        UnitCost unitCost = lastSelectedUnit.GetComponent<UnitCost>();
+        gc.MoneyAmount += unitCost.cost;
+        gc.UnitLimit += unitCost.limitCost;
+        up.placedUnits.Remove(lastSelectedUnit);
+        Destroy(lastSelectedUnit);
+        selectedUnit = null;
+        movedUnit = false;
+        up.SelectUnitType(0);
     }
 }
