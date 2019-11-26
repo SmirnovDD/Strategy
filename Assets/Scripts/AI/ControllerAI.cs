@@ -9,7 +9,8 @@ public class ControllerAI : MonoBehaviour
     public enum UnitType
     {
         melee,
-        archer
+        archer,
+        pikeman
     }
     public UnitType unitType;
 
@@ -130,6 +131,8 @@ public class ControllerAI : MonoBehaviour
                 anim.SetBool("isMoving", false);                
                 anim.SetBool("attack", true);
 
+                if (archerShootS)
+                    archerShootS.enemyTransform = targetTr;
                 if (!lerpRotationCourutieneRunning)
                     StartCoroutine(LerpRotationToFaceTarget());
 
@@ -161,7 +164,13 @@ public class ControllerAI : MonoBehaviour
         else
         {
             if (attackedUnitHealth)
-                DealDamageToEnemy.DealDamage(attackedUnitHealth, damage);
+            {
+                if (unitType == UnitType.pikeman && attackedUnitHealth.horseMan)
+                    DealDamageToEnemy.DealDamage(attackedUnitHealth, damage * 1.2f);
+                else
+                    DealDamageToEnemy.DealDamage(attackedUnitHealth, damage);
+
+            }
         }
 
         canChangeTarget = true;

@@ -63,7 +63,6 @@ public class UnitPlacement : MonoBehaviour
                 foreach(Button btn in allUnitBuyButtons)
                 {
                     btn.interactable = false;
-                    Debug.Log("dumb");
                 }
                 placingUnit = true;
 
@@ -200,6 +199,7 @@ public class UnitPlacement : MonoBehaviour
             gp.selectedUnit = null;
         gp.movedUnit = false;
 
+        gp.allParticleSystems.Clear();
         SelectUnitType(0);
     }
 }
