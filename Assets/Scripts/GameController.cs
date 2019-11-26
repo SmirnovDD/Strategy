@@ -36,6 +36,7 @@ public class GameController : MonoBehaviour
 
     public static bool battleEnded = false;
     public static bool battleStarted = false;
+    public static bool enteredScene = false;
 
     public delegate void BattleStarted();
     public static BattleStarted OnBattleStarted;
@@ -46,9 +47,10 @@ public class GameController : MonoBehaviour
     {
         battleStarted = false;
         battleEnded = false;
+        enteredScene = false;
 
-        MoneyAmount = LevelsData.levelsMoneyLimits[SceneManager.GetActiveScene().buildIndex]; // !!!!!!!!!!!!!!!!!!! BUILD INDEX - 1 КОГДА БУДЕТ МЕНЮ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        UnitLimit = LevelsData.levelsUnitsLimits[SceneManager.GetActiveScene().buildIndex]; // !!!!!!!!!!!!!!!!!!! BUILD INDEX - 1 КОГДА БУДЕТ МЕНЮ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        MoneyAmount = LevelsData.levelsMoneyLimits[SceneManager.GetActiveScene().buildIndex]; // !!!!!!!!!!!!!!!!!!! BUILD INDEX - 1 ЕСЛИ БУДЕТ МЕНЮ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        UnitLimit = LevelsData.levelsUnitsLimits[SceneManager.GetActiveScene().buildIndex]; // !!!!!!!!!!!!!!!!!!! BUILD INDEX - 1 ЕСЛИ БУДЕТ МЕНЮ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
     public static bool BattleEnded
     {
@@ -89,5 +91,10 @@ public class GameController : MonoBehaviour
         grid.SetActive(false);
 
         OnBattleStarted?.Invoke();        
+    }
+
+    public void EnterScene()
+    {
+        enteredScene = true;
     }
 }
