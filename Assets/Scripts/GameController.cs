@@ -88,6 +88,6 @@ public class GameController : MonoBehaviour
         battleStarted = true;
         grid.SetActive(false);
 
-        OnBattleStarted?.Invoke();
+        OnBattleStarted?.Invoke();        
     }
 }

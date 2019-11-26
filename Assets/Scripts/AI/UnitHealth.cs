@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class UnitHealth : MonoBehaviour
 {
+    public bool horseMan;
+
     public GameObject unitRagdoll;
     public float startingHP;
     private float hp;
+    private bool dead;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,8 +19,8 @@ public class UnitHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        hp -= damage;
-        if (hp <= 0)
+        hp -= damage;        
+        if (hp <= 0 && !dead)
         {
             if (unitRagdoll)
             {
@@ -25,6 +28,7 @@ public class UnitHealth : MonoBehaviour
                 Rigidbody ragdollRigidB = newRagdoll.GetComponentInChildren<Rigidbody>();
                 ragdollRigidB.AddForce(-transform.forward * 1000 + Vector3.up * 1000);
             }
+            dead = true;
             Destroy(gameObject);
         }
     }

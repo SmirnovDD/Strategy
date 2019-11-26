@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class GridPlacement : MonoBehaviour
 {
     public GameObject removeUnitButton;
+    public Button[] unitTypesSelectBtns;
+
     public GameObject unitToPlace;// выставляется из UnitPlacement скрипта при нажатии кнопки, ставим на свободную клетку
     public VirtualJoystick movementJoystick;
     public LayerMask layerMask;
@@ -24,6 +26,10 @@ public class GridPlacement : MonoBehaviour
 
     private GameController gc;
     private UnitPlacement up;
+
+    private ParticleSystem selectedUnitParticles;
+    [HideInInspector]
+    public List<ParticleSystem> allParticleSystems;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +37,15 @@ public class GridPlacement : MonoBehaviour
         up = GetComponent<UnitPlacement>();
     }
 
+    private void OnEnable()
+    {
+        GameController.OnBattleStarted += StopAllParticles;
+    }
+
+    private void OnDisable()
+    {
+        GameController.OnBattleStarted -= StopAllParticles;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -43,6 +58,9 @@ public class GridPlacement : MonoBehaviour
             else
             {
                 removeUnitButton.gameObject.SetActive(true);
+
+                if(!selectedUnitParticles.isPlaying)
+                    selectedUnitParticles.Play();
             }
 
             //#if UNITY_EDITOR
@@ -90,6 +108,8 @@ public class GridPlacement : MonoBehaviour
                             {
                                 selectedUnit = allCellsScripts[index].collidingObject;
                                 lastSelectedUnit = selectedUnit;
+                                selectedUnitParticles = lastSelectedUnit.GetComponent<ParticleSystem>();
+                                StopAllParticles();
                             }
                             else
                                 selectedUnit = null;
@@ -110,6 +130,14 @@ public class GridPlacement : MonoBehaviour
                             selectedCellTr = hit.collider.transform;
                             selectedUnit.transform.position = new Vector3(selectedCellTr.position.x, selectedUnit.transform.position.y, selectedCellTr.position.z);
                             selectedUnit = null;
+
+                            lastSelectedUnit = null;
+                            if (selectedUnitParticles)
+                            {
+                                if (selectedUnitParticles.isPlaying)
+                                    selectedUnitParticles.Stop();
+                            }
+                            selectedUnitParticles = null;
                         }
                         else if (selectedUnit && !allCellsScripts[index].collidingObject && Input.GetTouch(0).phase == TouchPhase.Moved)
                         {
@@ -133,12 +161,24 @@ public class GridPlacement : MonoBehaviour
 
                                 up.placedUnits.Add(newUnit);
                                 selectedUnit = newUnit;
-                                lastSelectedUnit = newUnit;
+
+                                //lastSelectedUnit = newUnit;
+
+                                selectedUnitParticles = newUnit.GetComponent<ParticleSystem>();
+
+                                allParticleSystems.Add(selectedUnitParticles);
+
+                                StopAllParticles();
+
                                 unitToPlace = null;
 
                                 foreach (Animator anim in up.placeUnitsButtonsAnimators)
                                 {
                                     anim.SetBool("flicker", false);
+                                }
+                                foreach(Button btn in unitTypesSelectBtns)
+                                {
+                                    btn.interactable = true;
                                 }
 
                                 up.removeAllUnitsButton.GetComponent<Button>().interactable = true;
@@ -155,7 +195,26 @@ public class GridPlacement : MonoBehaviour
                     if(selectedUnit && (Input.GetTouch(0).phase == TouchPhase.Ended || Input.GetTouch(0).phase == TouchPhase.Canceled))
                     {
                         selectedUnit = null;
+
+                        lastSelectedUnit = null;
+                        if (selectedUnitParticles)
+                        {
+                            if (selectedUnitParticles.isPlaying)
+                                selectedUnitParticles.Stop();
+                        }
+                        selectedUnitParticles = null;
+
                         movedUnit = false;
+                    }
+                    else if(Input.GetTouch(0).phase == TouchPhase.Began && !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+                    {
+                        lastSelectedUnit = null;
+                        if (selectedUnitParticles)
+                        {
+                            if (selectedUnitParticles.isPlaying)
+                                selectedUnitParticles.Stop();
+                        }
+                        selectedUnitParticles = null;
                     }
                 }
             }
@@ -169,9 +228,18 @@ public class GridPlacement : MonoBehaviour
         gc.MoneyAmount += unitCost.cost;
         gc.UnitLimit += unitCost.limitCost;
         up.placedUnits.Remove(lastSelectedUnit);
+
         Destroy(lastSelectedUnit);
+        allParticleSystems.Remove(selectedUnitParticles);
+
         selectedUnit = null;
         movedUnit = false;
         up.SelectUnitType(0);
+    }
+
+    public void StopAllParticles()
+    {
+        foreach (ParticleSystem ps in allParticleSystems)
+            ps.Stop();
     }
 }
