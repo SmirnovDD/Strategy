@@ -160,7 +160,7 @@ public class CameraMovement : MonoBehaviour
 
     public void PinchToZoom()
     {
-        if (Input.touchCount == 2 && !moveJoystick.isMoving && !isRotating)
+        if (Input.touchCount == 2 && !moveJoystick.isMoving && !isRotating && GameController.enteredScene)
         {
             // Store both touches.
             Touch touchZero = Input.GetTouch(0);
