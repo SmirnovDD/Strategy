@@ -1,0 +1,390 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1265873700723662972
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1265873700723662973}
+  - component: {fileID: 1265873700723662974}
+  m_Layer: 0
+  m_Name: CameraHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1265873700723662973
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265873700723662972}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 6.04, y: 8.37, z: -6.71}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1265873701100355145}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &1265873700723662974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265873700723662972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dce145493e6cad408e7be541ec651b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateJoystick: {fileID: 0}
+  moveJoystick: {fileID: 0}
+  lookPointX: {fileID: 0}
+  movementSpeed: 10
+  rotationSpeed: 60
+--- !u!1 &1265873701100355141
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1265873701100355145}
+  - component: {fileID: 1265873701100355144}
+  - component: {fileID: 1265873701100355142}
+  - component: {fileID: 1265873701100355146}
+  - component: {fileID: 1265873701100355143}
+  - component: {fileID: 1265873701100355147}
+  - component: {fileID: 1265873701100355148}
+  - component: {fileID: 1265873701100355149}
+  - component: {fileID: 1265873701100355150}
+  m_Layer: 0
+  m_Name: Main Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1265873701100355145
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265873701100355141}
+  m_LocalRotation: {x: 0.4385986, y: 0, z: 0, w: 0.89868313}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1265873700723662973}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 52.029003, y: 0, z: 0}
+--- !u!20 &1265873701100355144
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265873701100355141}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0.9515679, b: 1, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 90
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 1
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!81 &1265873701100355142
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265873701100355141}
+  m_Enabled: 1
+--- !u!114 &1265873701100355146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265873701100355141}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 1265873701100355145}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 1
+  antialiasingMode: 1
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 1
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_ShowToolkit: 1
+  m_ShowCustomSorter: 1
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
+--- !u!114 &1265873701100355143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265873701100355141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af8475f385e18e748b0b977d4562ade2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1265873701100355147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265873701100355141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 001da5d241595a949b106f24d287a2d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moneyAmountText: {fileID: 0}
+  unitLimitAmountText: {fileID: 0}
+  battleEndedCanvas: {fileID: 0}
+  teamWonText: {fileID: 0}
+  BGImage: {fileID: 0}
+  bgImageSprite: {fileID: 21300000, guid: e7e59db3618e86d458f87861d25ed4e9, type: 3}
+  joysticCanvas: {fileID: 0}
+  grid: {fileID: 0}
+--- !u!114 &1265873701100355148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265873701100355141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9176a8f30e207f5438ef5328f2d5e54e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  removeUnitButton: {fileID: 0}
+  unitTypesSelectBtns:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  unitToPlace: {fileID: 0}
+  movementJoystick: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  allCellsScripts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  selectedUnit: {fileID: 0}
+  movedUnit: 0
+  unitPlaceButtonIndex: 0
+  unitLimit: 0
+  allParticleSystems: []
+--- !u!114 &1265873701100355149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265873701100355141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 190d2da866dce6d4a93200a4c689c192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1265873701100355150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265873701100355141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 999a9efddaad97e43b385dd195f098c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  removeAllUnitsButton: {fileID: 0}
+  placeUnitsButtonsAnimators:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  allUnitBuyButtons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  pikemen:
+  - {fileID: 5887140133472723273, guid: a6b490715a8635a49ba911a6c75903f9, type: 3}
+  - {fileID: 4277521178729769303, guid: 1e2b645d3ec7496468e752d374fe12cc, type: 3}
+  - {fileID: 2222765307364710636, guid: 91c6d48212849bb4c958d936b33db5a9, type: 3}
+  - {fileID: 2908472719362601312, guid: 6fb0333044c55cf4e8b5598ccfe4bf4c, type: 3}
+  - {fileID: 1406337059945630763, guid: efc14812e494b0640a39386f9340c00c, type: 3}
+  swordsmen:
+  - {fileID: 3034747741408085019, guid: a3f9796a895dccd4993c4dceb5b3fce6, type: 3}
+  - {fileID: 3647640769958887709, guid: 1deb4018063d14b4c9fbf5864b5b5c22, type: 3}
+  - {fileID: 3895951203693865415, guid: 5188368d5dcc9a743a6cdd719a97c51f, type: 3}
+  - {fileID: 2453582823097066931, guid: 13ae3d49490ac144b9e492d0e03061e0, type: 3}
+  - {fileID: 3892693780900239274, guid: 30a2275fb0aed2b4ca08e65eff2f2c70, type: 3}
+  archers:
+  - {fileID: 8508807382921015179, guid: b6995e4f76529e64d97e46c44224eeb1, type: 3}
+  - {fileID: 3786659676968917138, guid: a3522cf6a13698545afa210b4e7fc2f3, type: 3}
+  - {fileID: 2218141432933261113, guid: 0b72eae6a154fea459a5c6e1f924ba79, type: 3}
+  - {fileID: 1876186501662827500, guid: 439f8627c4cd5614c8cb3d421c18afec, type: 3}
+  - {fileID: 8949149500441440226, guid: ac37bff0cb828d74e936fa28b96acf95, type: 3}
+  horsemen:
+  - {fileID: 5309455544738938638, guid: b07b6f692b37f3c418a711f6f92894da, type: 3}
+  - {fileID: 7235892015831047248, guid: c739b22b30884434dba1e5d15613492e, type: 3}
+  - {fileID: 8194250782355852256, guid: 9728633686520094497597d4edd02720, type: 3}
+  - {fileID: 1723387656995904775, guid: bef77fb576c3e3247997b571aadaa6a3, type: 3}
+  - {fileID: 6888612339640220474, guid: c5b1b1e85b3052246974baa10d3877d9, type: 3}
+  buyUnitsButtonsImages:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  pikemenBtnSprites:
+  - {fileID: 21300000, guid: cde98c6fc686cbb47b020380ec8dea0e, type: 3}
+  - {fileID: 21300000, guid: c244d98459e00e94083b73355dbdc102, type: 3}
+  - {fileID: 21300000, guid: b5a6fef381433b94080b7de4d4d785a8, type: 3}
+  - {fileID: 21300000, guid: 3af66ec50adadb74689173db0723cdc7, type: 3}
+  - {fileID: 21300000, guid: 5a87fe561ad48d24581947f2af3bc785, type: 3}
+  swordsmenBtnSprites:
+  - {fileID: 21300000, guid: 7ea754e5bdedaf144a735dd55ee68c31, type: 3}
+  - {fileID: 21300000, guid: 4d53cf260e17d4d42bfc6e93a188cbd8, type: 3}
+  - {fileID: 21300000, guid: 321f4fae63a56eb4896ac3340134a4b9, type: 3}
+  - {fileID: 21300000, guid: ad3c459cc2ac3a64ba72e45eb98b6714, type: 3}
+  - {fileID: 21300000, guid: bd9bdd26ff183a9488a1e80a738529bd, type: 3}
+  archersBtnSprites:
+  - {fileID: 21300000, guid: 61bcde2583c4d0647bc54550dc00dc1d, type: 3}
+  - {fileID: 21300000, guid: 1756cd13b51339c408fe076d124c503a, type: 3}
+  - {fileID: 21300000, guid: 99b0f2f3ea7ca0342ac3156c77545b3e, type: 3}
+  - {fileID: 21300000, guid: 6e56a294b4f8dfc4088445c5b400c1b7, type: 3}
+  - {fileID: 21300000, guid: f1f122f23d013834bade63f3f321df73, type: 3}
+  horsemenBtnSprites:
+  - {fileID: 21300000, guid: 63bbaa2dd2cebdc4d888a7b51a67de9d, type: 3}
+  - {fileID: 21300000, guid: b8b02abe42fb1c249a7fe9e45e905a73, type: 3}
+  - {fileID: 21300000, guid: 948baa9b558af554e881d61ff6317c11, type: 3}
+  - {fileID: 21300000, guid: 671b8f600fbcc674d8b00c7d4608231a, type: 3}
+  - {fileID: 21300000, guid: 60401f28eed6515488418404b43c4bf7, type: 3}
+  cellsUnitCheckScripts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  unitsCosts: 19000000320000004b0000006400000096000000
+  placedUnits: []
+  placingUnit: 0

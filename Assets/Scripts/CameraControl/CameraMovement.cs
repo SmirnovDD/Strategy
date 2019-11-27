@@ -30,7 +30,7 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameController.battleEnded)
+        if (GameController.battleEnded || !GameController.enteredScene)
             return;
 
         MoveCamera();

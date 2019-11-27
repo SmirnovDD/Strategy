@@ -32,7 +32,12 @@ public class GameController : MonoBehaviour
     public static GameObject battleEndedCanvasStatic;
     public TextMeshProUGUI teamWonText;
     public static TextMeshProUGUI teamWonTextStatic;
-
+    public Image BGImage;
+    public static Image BGImageStatic;
+    public Sprite bgImageSprite;
+    public static Sprite bgImageSpriteStatic;
+    public GameObject joysticCanvas;
+    public static GameObject joystickCanvasStatic;
 
     public static bool battleEnded = false;
     public static bool battleStarted = false;
@@ -57,15 +62,37 @@ public class GameController : MonoBehaviour
         get { return battleEnded; }
         set
         {
-            battleEnded = value; Time.timeScale = 0;
-            if(battleEndedCanvasStatic)
+            battleEnded = value;
+            if(joystickCanvasStatic)
+                joystickCanvasStatic.SetActive(false);
+            //Time.timeScale = 0;
+            if (battleEndedCanvasStatic)
                 battleEndedCanvasStatic.SetActive(true);
             if (AllUnitsList.allAllies.Count == 0)
-                teamWonTextStatic.text = "YOUR TEAM LOST!";
+            {
+                foreach (Transform tr in AllUnitsList.allEnemies)
+                {
+                    Animator anim = tr.gameObject.GetComponent<Animator>();
+                    anim.SetBool("isMoving", false);
+                    anim.SetBool("attack", false);
+                }
+                teamWonTextStatic.text = "Defeat!";
+                teamWonTextStatic.color = Color.red;
+                BGImageStatic.sprite = bgImageSpriteStatic;
+            }
             else
-                teamWonTextStatic.text = "YOUR TEAM WON!";
+            {
+                foreach (Transform tr in AllUnitsList.allAllies)
+                {
+                    Animator anim = tr.gameObject.GetComponent<Animator>();
+                    anim.SetBool("isMoving", false);
+                    anim.SetBool("attack", false);
+                }
+                teamWonTextStatic.text = "Victory!";
+            }
         }
     }
+
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -76,7 +103,12 @@ public class GameController : MonoBehaviour
     {
         battleEndedCanvasStatic = battleEndedCanvas;
         teamWonTextStatic = teamWonText;
+        BGImageStatic = BGImage;
+        bgImageSpriteStatic = bgImageSprite;
+        joystickCanvasStatic = joysticCanvas;
+
         battleStarted = false;
+        battleEnded = false;
         Time.timeScale = 1;
     }
 
