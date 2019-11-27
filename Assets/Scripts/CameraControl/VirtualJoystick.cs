@@ -31,6 +31,8 @@ public class VirtualJoystick : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     // Update is called once per frame
     void Update()
     {
+        if (!GameController.enteredScene)
+            return;
 //#if UNITY_EDITOR
 //        //if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject() && Time.timeScale != 0)
 //        //{
