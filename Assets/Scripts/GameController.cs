@@ -39,6 +39,12 @@ public class GameController : MonoBehaviour
     public GameObject joysticCanvas;
     public static GameObject joystickCanvasStatic;
 
+    public Button loadNextLevelBtn;
+    public static Button loadNextLevelBtnStatic;
+
+    public Button loadPreviousLevelBtn;
+    public static Button loadPreviousLevelBtnStatic;
+
     public static bool battleEnded = false;
     public static bool battleStarted = false;
     public static bool enteredScene = false;
@@ -106,8 +112,15 @@ public class GameController : MonoBehaviour
         BGImageStatic = BGImage;
         bgImageSpriteStatic = bgImageSprite;
         joystickCanvasStatic = joysticCanvas;
+        loadNextLevelBtnStatic = loadNextLevelBtn;
+        loadPreviousLevelBtnStatic = loadPreviousLevelBtn;
 
-        battleStarted = false;
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+            loadPreviousLevelBtnStatic.gameObject.SetActive(false);
+        if (SceneManager.GetActiveScene().buildIndex == 59) //TEMP
+            loadNextLevelBtnStatic.gameObject.SetActive(false);
+
+            battleStarted = false;
         battleEnded = false;
         Time.timeScale = 1;
     }
@@ -117,6 +130,20 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    public void LoadNextLevel()
+    {
+        if (SceneManager.GetActiveScene().buildIndex < 59) //TEMP
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        else
+            SceneManager.LoadScene(0);
+    }
+    public void LoadPreviousLevel()
+    {
+        if (SceneManager.GetActiveScene().buildIndex > 0)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        else
+            SceneManager.LoadScene(0);
+    }
     public void StartBattle()
     {
         battleStarted = true;
