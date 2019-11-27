@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7687494439214060997}
   - component: {fileID: 1726129666515415027}
   - component: {fileID: 4956484764658946826}
+  - component: {fileID: 1119092815}
   m_Layer: 0
   m_Name: Plane_env_01
   m_TagString: Environment
@@ -25,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6698029873647314902}
-  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.3, z: 4.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -57,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1e675ab5533df7f41bbf1d987828ac48, type: 2}
+  - {fileID: 2100000, guid: 2d7677b91b33de54e867ea532fab2144, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -78,3 +79,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &1119092815
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6698029873647314902}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: -462981019419857548, guid: d28f3a09eb3c3784a963ccff7ee0bc00, type: 3}
