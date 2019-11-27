@@ -27,6 +27,8 @@ public class GameController : MonoBehaviour
     private int moneyAmount;
     private int unitLimit;
 
+    public int availableUnitsUpgrades;
+
     public TextMeshProUGUI moneyAmountText, unitLimitAmountText;
     public GameObject battleEndedCanvas;
     public static GameObject battleEndedCanvasStatic;
@@ -40,10 +42,9 @@ public class GameController : MonoBehaviour
     public static GameObject joystickCanvasStatic;
 
     public Button loadNextLevelBtn;
-    public static Button loadNextLevelBtnStatic;
-
     public Button loadPreviousLevelBtn;
-    public static Button loadPreviousLevelBtnStatic;
+    public TextMeshProUGUI levelNumberText;
+
 
     public static bool battleEnded = false;
     public static bool battleStarted = false;
@@ -60,8 +61,11 @@ public class GameController : MonoBehaviour
         battleEnded = false;
         enteredScene = false;
 
+        levelNumberText.text = "LEVEL " + (SceneManager.GetActiveScene().buildIndex + 1).ToString();
+
         MoneyAmount = LevelsData.levelsMoneyLimits[SceneManager.GetActiveScene().buildIndex]; // !!!!!!!!!!!!!!!!!!! BUILD INDEX - 1 ЕСЛИ БУДЕТ МЕНЮ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         UnitLimit = LevelsData.levelsUnitsLimits[SceneManager.GetActiveScene().buildIndex]; // !!!!!!!!!!!!!!!!!!! BUILD INDEX - 1 ЕСЛИ БУДЕТ МЕНЮ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        availableUnitsUpgrades = LevelsData.levelsUnitsUpgradesAvailable[SceneManager.GetActiveScene().buildIndex];
     }
     public static bool BattleEnded
     {
@@ -112,13 +116,11 @@ public class GameController : MonoBehaviour
         BGImageStatic = BGImage;
         bgImageSpriteStatic = bgImageSprite;
         joystickCanvasStatic = joysticCanvas;
-        loadNextLevelBtnStatic = loadNextLevelBtn;
-        loadPreviousLevelBtnStatic = loadPreviousLevelBtn;
 
-        if (SceneManager.GetActiveScene().buildIndex == 0)
-            loadPreviousLevelBtnStatic.gameObject.SetActive(false);
-        if (SceneManager.GetActiveScene().buildIndex == 59) //TEMP
-            loadNextLevelBtnStatic.gameObject.SetActive(false);
+        if (SceneManager.GetActiveScene().buildIndex == 0 && loadPreviousLevelBtn)
+            loadPreviousLevelBtn.gameObject.SetActive(false);
+        if (SceneManager.GetActiveScene().buildIndex == 59 && loadNextLevelBtn) //TEMP
+            loadNextLevelBtn.gameObject.SetActive(false);
 
             battleStarted = false;
         battleEnded = false;

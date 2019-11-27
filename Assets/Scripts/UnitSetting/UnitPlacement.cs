@@ -123,7 +123,7 @@ public class UnitPlacement : MonoBehaviour
 
         if(typeIndex == 0)
         {
-            for(int i = 0; i < buyUnitsButtonsImages.Length; i++)
+            for(int i = 0; i < gc.availableUnitsUpgrades; i++)
             {
                 buyUnitsButtonsImages[i].sprite = pikemenBtnSprites[i];
                 if(gc.MoneyAmount < unitsCosts[i] || gc.UnitLimit < 1)
@@ -138,7 +138,7 @@ public class UnitPlacement : MonoBehaviour
         }
         else if (typeIndex == 1)
         {
-            for (int i = 0; i < buyUnitsButtonsImages.Length; i++)
+            for (int i = 0; i < gc.availableUnitsUpgrades; i++)
             {
                 buyUnitsButtonsImages[i].sprite = swordsmenBtnSprites[i];
                 if (gc.MoneyAmount < unitsCosts[i] || gc.UnitLimit < 1)
@@ -153,7 +153,7 @@ public class UnitPlacement : MonoBehaviour
         }
         else if (typeIndex == 2)
         {
-            for (int i = 0; i < buyUnitsButtonsImages.Length; i++)
+            for (int i = 0; i < gc.availableUnitsUpgrades; i++)
             {
                 buyUnitsButtonsImages[i].sprite = archersBtnSprites[i];
                 if (gc.MoneyAmount < unitsCosts[i] || gc.UnitLimit < 1)
@@ -168,7 +168,7 @@ public class UnitPlacement : MonoBehaviour
         }
         else                   
         {
-            for (int i = 0; i < buyUnitsButtonsImages.Length; i++)
+            for (int i = 0; i < gc.availableUnitsUpgrades; i++)
             {
                 buyUnitsButtonsImages[i].sprite = horsemenBtnSprites[i];
                 if (gc.MoneyAmount < unitsCosts[i] || gc.UnitLimit < 2)
