@@ -51,8 +51,10 @@ public class UnitPlacement : MonoBehaviour
                 removeAllUnitsButton.SetActive(false);
         }
     }
-        public void PlaceUnit(int index)
+    public void PlaceUnit(int index)
     {
+        gp.selectedUnitType = currentSelectedUnitType;
+
         foreach(RegisterUnitsInGrids rs in cellsUnitCheckScripts)
         {
             if(rs.collidingObject == null)
@@ -123,10 +125,10 @@ public class UnitPlacement : MonoBehaviour
 
         if(typeIndex == 0)
         {
-            for(int i = 0; i < gc.availableUnitsUpgrades; i++)
+            for(int i = 0; i < buyUnitsButtonsImages.Length; i++)
             {
                 buyUnitsButtonsImages[i].sprite = pikemenBtnSprites[i];
-                if(gc.MoneyAmount < unitsCosts[i] || gc.UnitLimit < 1)
+                if(gc.MoneyAmount < unitsCosts[i] || gc.UnitLimit < 1 || i > gc.availableUnitsUpgrades - 1)
                 {
                     buyUnitsButtonsImages[i].gameObject.GetComponent<Button>().interactable = false;
                 }
@@ -138,10 +140,10 @@ public class UnitPlacement : MonoBehaviour
         }
         else if (typeIndex == 1)
         {
-            for (int i = 0; i < gc.availableUnitsUpgrades; i++)
+            for (int i = 0; i < buyUnitsButtonsImages.Length; i++)
             {
                 buyUnitsButtonsImages[i].sprite = swordsmenBtnSprites[i];
-                if (gc.MoneyAmount < unitsCosts[i] || gc.UnitLimit < 1)
+                if (gc.MoneyAmount < unitsCosts[i] || gc.UnitLimit < 1 || i > gc.availableUnitsUpgrades - 1)
                 {
                     buyUnitsButtonsImages[i].gameObject.GetComponent<Button>().interactable = false;
                 }
@@ -153,10 +155,10 @@ public class UnitPlacement : MonoBehaviour
         }
         else if (typeIndex == 2)
         {
-            for (int i = 0; i < gc.availableUnitsUpgrades; i++)
+            for (int i = 0; i < buyUnitsButtonsImages.Length; i++)
             {
                 buyUnitsButtonsImages[i].sprite = archersBtnSprites[i];
-                if (gc.MoneyAmount < unitsCosts[i] || gc.UnitLimit < 1)
+                if (gc.MoneyAmount < unitsCosts[i] || gc.UnitLimit < 1 || i > gc.availableUnitsUpgrades - 1)
                 {
                     buyUnitsButtonsImages[i].gameObject.GetComponent<Button>().interactable = false;
                 }
@@ -168,10 +170,10 @@ public class UnitPlacement : MonoBehaviour
         }
         else                   
         {
-            for (int i = 0; i < gc.availableUnitsUpgrades; i++)
+            for (int i = 0; i < buyUnitsButtonsImages.Length; i++)
             {
                 buyUnitsButtonsImages[i].sprite = horsemenBtnSprites[i];
-                if (gc.MoneyAmount < unitsCosts[i] || gc.UnitLimit < 2)
+                if (gc.MoneyAmount < unitsCosts[i] || gc.UnitLimit < 2 || i > gc.availableUnitsUpgrades - 1)
                 {
                     buyUnitsButtonsImages[i].gameObject.GetComponent<Button>().interactable = false;
                 }

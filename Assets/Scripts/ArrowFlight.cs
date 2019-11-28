@@ -7,11 +7,14 @@ public class ArrowFlight : MonoBehaviour
     private Rigidbody rigidB;
     [HideInInspector]
     public float damage;
+
+    private AudioSource audioS;
     // Start is called before the first frame update
     void Start()
     {
         rigidB = GetComponent<Rigidbody>();
         rigidB.AddForce(transform.forward * flightSpeed);
+        audioS = GetComponent<AudioSource>();
     }
     private void FixedUpdate()
     {
@@ -23,6 +26,7 @@ public class ArrowFlight : MonoBehaviour
         if ((isEnemy && !enemyArrow) || (!isEnemy && enemyArrow))
         {
             Destroy(rigidB);
+            audioS.Play();
             transform.SetParent(other.transform);
             UnitHealth attackedUnitHealth = other.gameObject.GetComponent<UnitHealth>();
             DealDamageToEnemy.DealDamage(attackedUnitHealth, damage);
@@ -34,6 +38,7 @@ public class ArrowFlight : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Environment"))
         {
+            audioS.Play();
             Destroy(rigidB);
             Destroy(this);
         }
