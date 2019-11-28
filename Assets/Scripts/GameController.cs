@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using GameAnalyticsSDK;
+
 public class GameController : MonoBehaviour
 {
     public int MoneyAmount
@@ -27,6 +29,8 @@ public class GameController : MonoBehaviour
     private int moneyAmount;
     private int unitLimit;
 
+    public int availableUnitsUpgrades;
+
     public TextMeshProUGUI moneyAmountText, unitLimitAmountText;
     public GameObject battleEndedCanvas;
     public static GameObject battleEndedCanvasStatic;
@@ -39,6 +43,13 @@ public class GameController : MonoBehaviour
     public GameObject joysticCanvas;
     public static GameObject joystickCanvasStatic;
 
+    public Button loadNextLevelBtn;
+    public Button loadPreviousLevelBtn;
+    public TextMeshProUGUI levelNumberText;
+
+    public TextMeshProUGUI battleEndedBtnText;
+    public static TextMeshProUGUI battleEndedBtnTextStatic;
+
     public static bool battleEnded = false;
     public static bool battleStarted = false;
     public static bool enteredScene = false;
@@ -48,14 +59,23 @@ public class GameController : MonoBehaviour
 
     public GameObject grid;
 
+    private static bool won;
+
     private void Start()
     {
         battleStarted = false;
         battleEnded = false;
         enteredScene = false;
 
+        levelNumberText.text = "LEVEL " + (SceneManager.GetActiveScene().buildIndex + 1).ToString();
+
         MoneyAmount = LevelsData.levelsMoneyLimits[SceneManager.GetActiveScene().buildIndex]; // !!!!!!!!!!!!!!!!!!! BUILD INDEX - 1 ЕСЛИ БУДЕТ МЕНЮ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         UnitLimit = LevelsData.levelsUnitsLimits[SceneManager.GetActiveScene().buildIndex]; // !!!!!!!!!!!!!!!!!!! BUILD INDEX - 1 ЕСЛИ БУДЕТ МЕНЮ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        availableUnitsUpgrades = LevelsData.levelsUnitsUpgradesAvailable[SceneManager.GetActiveScene().buildIndex];
+
+        GameAnalytics.Initialize();
+        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, Application.version, "Level: " + SceneManager.GetActiveScene().buildIndex.ToString());
+
     }
     public static bool BattleEnded
     {
@@ -68,6 +88,7 @@ public class GameController : MonoBehaviour
             //Time.timeScale = 0;
             if (battleEndedCanvasStatic)
                 battleEndedCanvasStatic.SetActive(true);
+
             if (AllUnitsList.allAllies.Count == 0)
             {
                 foreach (Transform tr in AllUnitsList.allEnemies)
@@ -76,9 +97,17 @@ public class GameController : MonoBehaviour
                     anim.SetBool("isMoving", false);
                     anim.SetBool("attack", false);
                 }
+
                 teamWonTextStatic.text = "Defeat!";
+                battleEndedBtnTextStatic.text = "RESTART";
                 teamWonTextStatic.color = Color.red;
-                BGImageStatic.sprite = bgImageSpriteStatic;
+
+                if (BGImageStatic)
+                    BGImageStatic.sprite = bgImageSpriteStatic;
+
+                won = false;
+
+                GameAnalytics.NewProgressionEvent(GAProgressionStatus.Fail, Application.version, "Level: " + SceneManager.GetActiveScene().buildIndex.ToString());
             }
             else
             {
@@ -88,7 +117,13 @@ public class GameController : MonoBehaviour
                     anim.SetBool("isMoving", false);
                     anim.SetBool("attack", false);
                 }
+
                 teamWonTextStatic.text = "Victory!";
+                battleEndedBtnTextStatic.text = "NEXT";
+
+                won = true;
+
+                GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, Application.version, "Level: " + SceneManager.GetActiveScene().buildIndex.ToString());
             }
         }
     }
@@ -106,17 +141,45 @@ public class GameController : MonoBehaviour
         BGImageStatic = BGImage;
         bgImageSpriteStatic = bgImageSprite;
         joystickCanvasStatic = joysticCanvas;
+        battleEndedBtnTextStatic = battleEndedBtnText;
 
-        battleStarted = false;
+        if (SceneManager.GetActiveScene().buildIndex == 0 && loadPreviousLevelBtn)
+            loadPreviousLevelBtn.gameObject.SetActive(false);
+        if (SceneManager.GetActiveScene().buildIndex == 59 && loadNextLevelBtn) //TEMP
+            loadNextLevelBtn.gameObject.SetActive(false);
+
+            battleStarted = false;
         battleEnded = false;
         Time.timeScale = 1;
     }
 
     public void ReloadScene()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void LoadNextLevel()
+    {
+        if (SceneManager.GetActiveScene().buildIndex < 59) //TEMP
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        else
+            SceneManager.LoadScene(0);
+    }
+    public void LoadPreviousLevel()
+    {
+        if (SceneManager.GetActiveScene().buildIndex > 0)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        else
+            SceneManager.LoadScene(0);
+    }
+
+    public void LoadNextLevelOrLeloadOnBattleEnded()
+    {
+        if (won)
+            LoadNextLevel();
+        else
+            ReloadScene();
+    }
     public void StartBattle()
     {
         battleStarted = true;

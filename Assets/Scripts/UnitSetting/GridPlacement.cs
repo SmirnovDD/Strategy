@@ -27,6 +27,8 @@ public class GridPlacement : MonoBehaviour
     private GameController gc;
     private UnitPlacement up;
 
+    public int selectedUnitType;
+
     private ParticleSystem selectedUnitParticles;
     [HideInInspector]
     public List<ParticleSystem> allParticleSystems;
@@ -184,7 +186,8 @@ public class GridPlacement : MonoBehaviour
                                 up.removeAllUnitsButton.GetComponent<Button>().interactable = true;
                                 removeUnitButton.GetComponent<Button>().interactable = true;
 
-                                up.SelectUnitType(0);
+                                Debug.Log(selectedUnitType);
+                                up.SelectUnitType(selectedUnitType);
                                 up.placingUnit = false;
                             }
                         }
