@@ -35,11 +35,15 @@ public class ControllerAI : MonoBehaviour
     private bool lerpRotationCourutieneRunning;
     private bool isAttacking; //юнит начал анимацию атаки, но еще не завершил ее
     private ArcherShoot archerShootS;
+
+    //SOUNDS
+    private AudioSource audioS;
+    public AudioClip[] moveAndAttackClips;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         thisTr = transform;
-
+        audioS = GetComponent<AudioSource>();
         if(unitType == UnitType.archer)
         {
             archerShootS = GetComponent<ArcherShoot>();
@@ -126,19 +130,27 @@ public class ControllerAI : MonoBehaviour
         {
             if (targetTr && !isAttacking)
             {
-                canChangeTarget = false;
+                if (Vector3.Distance(thisTr.position, targetTr.position) < agent.stoppingDistance)
+                {
+                    canChangeTarget = false;
 
-                anim.SetBool("isMoving", false);                
-                anim.SetBool("attack", true);
+                    anim.SetBool("isMoving", false);
+                    anim.SetBool("attack", true);
 
-                if (archerShootS)
-                    archerShootS.enemyTransform = targetTr;
-                if (!lerpRotationCourutieneRunning)
-                    StartCoroutine(LerpRotationToFaceTarget());
+                    if (archerShootS)
+                        archerShootS.enemyTransform = targetTr;
+                    if (!lerpRotationCourutieneRunning)
+                        StartCoroutine(LerpRotationToFaceTarget());
 
-                attackedUnitHealth = targetTr.gameObject.GetComponent<UnitHealth>(); //запоминаем, кого атаковали во время начала анимации
+                    attackedUnitHealth = targetTr.gameObject.GetComponent<UnitHealth>(); //запоминаем, кого атаковали во время начала анимации
 
-                isAttacking = true;
+                    isAttacking = true;
+                }
+                else
+                {
+                    MoveToTarget();
+                    targetSwitched = false;
+                }
             }
         }
     }
@@ -177,6 +189,10 @@ public class ControllerAI : MonoBehaviour
 
         StopCoroutine(LerpRotationToFaceTarget());
 
+        audioS.clip = moveAndAttackClips[1];
+        audioS.Play();
+        audioS.loop = false;
+
         isAttacking = false;
     }
 
@@ -188,7 +204,13 @@ public class ControllerAI : MonoBehaviour
     {
         anim.SetBool("isMoving", true);
         anim.SetBool("attack", false);
-
+        
+        if(audioS.clip != moveAndAttackClips[0])
+        {
+            audioS.clip = moveAndAttackClips[0];
+            audioS.loop = true;
+            audioS.Play();
+        }
         if (targetTr != null)
         {
             agent.SetDestination(targetTr.position);

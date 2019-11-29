@@ -1207,6 +1207,9 @@ MonoBehaviour:
   targetTr: {fileID: 0}
   anim: {fileID: 524702847303083091}
   damage: 70
+  moveAndAttackClips:
+  - {fileID: 8300000, guid: 56b4ec04825611b43b57a5f27c50f72b, type: 3}
+  - {fileID: 8300000, guid: 81c20fb2047214b419fe3283802e90c3, type: 3}
 --- !u!114 &1600956837865983249
 MonoBehaviour:
   m_ObjectHideFlags: 0
