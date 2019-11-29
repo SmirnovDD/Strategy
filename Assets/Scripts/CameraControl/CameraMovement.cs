@@ -62,7 +62,7 @@ public class CameraMovement : MonoBehaviour
             }
             else if ((Input.GetTouch(0).phase == TouchPhase.Moved || Input.GetTouch(0).phase == TouchPhase.Stationary) && registerRotationTouch)
             {
-                transform.Rotate(Vector3.up, rotateJoystick.InputDirection.x * rotationSpeed * Time.deltaTime, Space.World);
+                transform.Rotate(Vector3.up, rotateJoystick.InputDirection.x * rotationSpeed * Time.unscaledDeltaTime, Space.World);
             }
             else if (Input.GetTouch(0).phase == TouchPhase.Ended || Input.GetTouch(0).phase == TouchPhase.Canceled)
             {
@@ -92,7 +92,7 @@ public class CameraMovement : MonoBehaviour
                 }
                 else if (moveJoystick.isMoving && (Input.GetTouch(1).phase == TouchPhase.Moved || Input.GetTouch(1).phase == TouchPhase.Stationary))
                 {
-                    transform.Rotate(Vector3.up, rotateJoystick.InputDirection.x * rotationSpeed * Time.deltaTime, Space.World);
+                    transform.Rotate(Vector3.up, rotateJoystick.InputDirection.x * rotationSpeed * Time.unscaledDeltaTime, Space.World);
                 }
                 else if (Input.GetTouch(1).phase == TouchPhase.Ended || Input.GetTouch(1).phase == TouchPhase.Canceled)
                 {
@@ -114,7 +114,7 @@ public class CameraMovement : MonoBehaviour
                 }
                 else if ((Input.GetTouch(0).phase == TouchPhase.Moved || Input.GetTouch(0).phase == TouchPhase.Stationary) && registerRotationTouch)
                 {
-                    transform.Rotate(Vector3.up, rotateJoystick.InputDirection.x * rotationSpeed * Time.deltaTime, Space.World);
+                    transform.Rotate(Vector3.up, rotateJoystick.InputDirection.x * rotationSpeed * Time.unscaledDeltaTime, Space.World);
                 }
                 else if (Input.GetTouch(0).phase == TouchPhase.Ended || Input.GetTouch(0).phase == TouchPhase.Canceled)
                 {
@@ -146,12 +146,12 @@ public class CameraMovement : MonoBehaviour
 #if UNITY_EDITOR
         if (Input.GetMouseButton(0))
         {
-            transform.Translate((VirtualJoystick.InputDirection * movementSpeed * Time.deltaTime), Space.Self);
+            transform.Translate((VirtualJoystick.InputDirection * movementSpeed * Time.unscaledDeltaTime), Space.Self);
         }
 #elif UNITY_ANDROID
         if (Input.touchCount > 0)
         {
-            transform.Translate((VirtualJoystick.InputDirection * movementSpeed * Time.deltaTime), Space.Self);
+            transform.Translate((VirtualJoystick.InputDirection * movementSpeed * Time.unscaledDeltaTime), Space.Self);
         }
 #endif
 

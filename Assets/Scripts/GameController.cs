@@ -78,10 +78,6 @@ public class GameController : MonoBehaviour
         UnitLimit = LevelsData.levelsUnitsLimits[SceneManager.GetActiveScene().buildIndex]; // !!!!!!!!!!!!!!!!!!! BUILD INDEX - 1 ЕСЛИ БУДЕТ МЕНЮ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         availableUnitsUpgrades = LevelsData.levelsUnitsUpgradesAvailable[SceneManager.GetActiveScene().buildIndex];
 
-        pauseBtn = GameObject.FindGameObjectWithTag("PauseBtn").GetComponent<Button>();
-        pauseBtn.onClick.AddListener(() => PauseOrUnpause());
-        pauseBtn.gameObject.SetActive(false);
-
         GameAnalytics.Initialize();
         GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, Application.version, "Level: " + SceneManager.GetActiveScene().buildIndex.ToString());
 
@@ -204,13 +200,15 @@ public class GameController : MonoBehaviour
         pauseBtn.gameObject.SetActive(true);
         battleStarted = true;
         grid.SetActive(false);
-
         OnBattleStarted?.Invoke();        
     }
 
     public void EnterScene()
     {
         enteredScene = true;
+        pauseBtn = GameObject.FindGameObjectWithTag("PauseBtn").GetComponent<Button>();
+        pauseBtn.onClick.AddListener(() => PauseOrUnpause());
+        pauseBtn.gameObject.SetActive(false);
     }
 
     public void PauseOrUnpause()
