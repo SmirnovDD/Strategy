@@ -57,6 +57,7 @@ public class Tutorial : MonoBehaviour
                 break;
             case 6:
                 Destroy(gameObject);
+                PlayerPrefs.SetInt("checkedTutorial", 1);
                 break;
         }
 
