@@ -7668,6 +7668,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: envir_1
       objectReference: {fileID: 0}
+    - target: {fileID: 7642722077516290550, guid: a3975d6441a1f3c4f83cd779b3239eae,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7642722077516290505, guid: a3975d6441a1f3c4f83cd779b3239eae,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7740,7 +7745,7 @@ PrefabInstance:
     - target: {fileID: 7888334951271779675, guid: f5056d038aaf7344498e32bb8d1a27fe,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7888334951271779674, guid: f5056d038aaf7344498e32bb8d1a27fe,
         type: 3}
