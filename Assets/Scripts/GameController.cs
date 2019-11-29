@@ -59,6 +59,9 @@ public class GameController : MonoBehaviour
 
     public GameObject grid;
 
+    private static AudioSource cameraAudioS;
+    public AudioClip[] winAndLooseClips;
+    private static AudioClip[] winAndLooseClipsStatic;
     private static bool won;
 
     private void Start()
@@ -66,6 +69,7 @@ public class GameController : MonoBehaviour
         battleStarted = false;
         battleEnded = false;
         enteredScene = false;
+        cameraAudioS = GetComponent<AudioSource>();
 
         levelNumberText.text = "LEVEL " + (SceneManager.GetActiveScene().buildIndex + 1).ToString();
 
@@ -106,7 +110,9 @@ public class GameController : MonoBehaviour
                     BGImageStatic.sprite = bgImageSpriteStatic;
 
                 won = false;
-
+                cameraAudioS.clip = winAndLooseClipsStatic[1];
+                cameraAudioS.volume = 0.5f;
+                cameraAudioS.Play();
                 GameAnalytics.NewProgressionEvent(GAProgressionStatus.Fail, Application.version, "Level: " + SceneManager.GetActiveScene().buildIndex.ToString());
             }
             else
@@ -122,7 +128,8 @@ public class GameController : MonoBehaviour
                 battleEndedBtnTextStatic.text = "NEXT";
 
                 won = true;
-
+                cameraAudioS.clip = winAndLooseClipsStatic[0];
+                cameraAudioS.Play();
                 GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, Application.version, "Level: " + SceneManager.GetActiveScene().buildIndex.ToString());
             }
         }
@@ -142,6 +149,7 @@ public class GameController : MonoBehaviour
         bgImageSpriteStatic = bgImageSprite;
         joystickCanvasStatic = joysticCanvas;
         battleEndedBtnTextStatic = battleEndedBtnText;
+        winAndLooseClipsStatic = winAndLooseClips;
 
         if (SceneManager.GetActiveScene().buildIndex == 0 && loadPreviousLevelBtn)
             loadPreviousLevelBtn.gameObject.SetActive(false);

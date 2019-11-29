@@ -186,7 +186,6 @@ public class GridPlacement : MonoBehaviour
                                 up.removeAllUnitsButton.GetComponent<Button>().interactable = true;
                                 removeUnitButton.GetComponent<Button>().interactable = true;
 
-                                Debug.Log(selectedUnitType);
                                 up.SelectUnitType(selectedUnitType);
                                 up.placingUnit = false;
                             }
