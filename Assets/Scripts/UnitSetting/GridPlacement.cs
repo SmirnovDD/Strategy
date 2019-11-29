@@ -65,34 +65,136 @@ public class GridPlacement : MonoBehaviour
                     selectedUnitParticles.Play();
             }
 
-            //#if UNITY_EDITOR
-            //            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //            RaycastHit hit;
-            //            Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask);
-            //            if (hit.collider)
-            //            {
-            //                int index = int.Parse(hit.collider.name);
+#if UNITY_EDITOR
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask);
 
-            //                if (allCellsScripts[index].collidingObject)
-            //                {
-            //                    if (Input.GetMouseButtonDown(0))
-            //                    {
-            //                        if (!selectedUnit)
-            //                            selectedUnit = allCellsScripts[index].collidingObject;
-            //                        else
-            //                            selectedUnit = null;
-            //                    }
-            //                }
-            //                else
-            //                {
-            //                    if(selectedUnit && !allCellsScripts[index].collidingObject)
-            //                    {
-            //                        selectedCellTr = allCellsScripts[index].gameObject.transform;
-            //                        selectedUnit.transform.position = new Vector3(selectedCellTr.position.x, selectedUnit.transform.position.y, selectedCellTr.position.z);
-            //                    }
-            //                }
-            //            }
-            //#elif UNITY_ANDROID
+            if (hit.collider)
+            {
+                if (hit.collider && !EventSystem.current.IsPointerOverGameObject())
+                {
+                    int index = int.Parse(hit.collider.name);
+
+                    if (allCellsScripts[index].collidingObject)
+                    {
+                        if (Input.GetMouseButtonDown(0)) //|| Input.GetTouch(0).phase == TouchPhase.Moved)
+                        {
+                            if (!selectedUnit)
+                            {
+                                selectedUnit = allCellsScripts[index].collidingObject;
+                                lastSelectedUnit = selectedUnit;
+                                selectedUnitParticles = lastSelectedUnit.GetComponent<ParticleSystem>();
+                                StopAllParticles();
+                            }
+                            else
+                                selectedUnit = null;
+                        }
+                        else if (Input.GetMouseButtonUp(0))
+                        {
+                            if (movedUnit)
+                            {
+                                selectedUnit = null;
+                                movedUnit = false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (selectedUnit && !allCellsScripts[index].collidingObject && Input.GetMouseButtonDown(0))
+                        {
+                            selectedCellTr = hit.collider.transform;
+                            selectedUnit.transform.position = new Vector3(selectedCellTr.position.x, selectedUnit.transform.position.y, selectedCellTr.position.z);
+                            selectedUnit = null;
+
+                            lastSelectedUnit = null;
+                            if (selectedUnitParticles)
+                            {
+                                if (selectedUnitParticles.isPlaying)
+                                    selectedUnitParticles.Stop();
+                            }
+                            selectedUnitParticles = null;
+                        }
+                        else if (selectedUnit && !allCellsScripts[index].collidingObject && Input.GetMouseButton(0))
+                        {
+                            movedUnit = true;
+                            selectedCellTr = hit.collider.transform;
+                            selectedUnit.transform.position = new Vector3(selectedCellTr.position.x, selectedUnit.transform.position.y, selectedCellTr.position.z);
+                        }
+                        else
+                        {
+                            if (Input.GetMouseButtonDown(0) && unitToPlace)
+                            {
+                                selectedCellTr = hit.collider.transform;
+                                GameObject newUnit = Instantiate(unitToPlace, new Vector3(selectedCellTr.position.x, -0.1606905f, selectedCellTr.position.z), Quaternion.identity);
+
+                                UnitCost unitCost = newUnit.GetComponent<UnitCost>();
+                                unitCost.cost = up.unitsCosts[unitPlaceButtonIndex];
+                                unitCost.limitCost = unitLimit;
+
+                                gc.MoneyAmount -= up.unitsCosts[unitPlaceButtonIndex];
+                                gc.UnitLimit -= unitLimit;
+
+                                up.placedUnits.Add(newUnit);
+                                selectedUnit = newUnit;
+
+                                //lastSelectedUnit = newUnit;
+
+                                selectedUnitParticles = newUnit.GetComponent<ParticleSystem>();
+
+                                allParticleSystems.Add(selectedUnitParticles);
+
+                                StopAllParticles();
+
+                                unitToPlace = null;
+
+                                foreach (Animator anim in up.placeUnitsButtonsAnimators)
+                                {
+                                    anim.SetBool("flicker", false);
+                                }
+                                foreach (Button btn in unitTypesSelectBtns)
+                                {
+                                    btn.interactable = true;
+                                }
+
+                                up.removeAllUnitsButton.GetComponent<Button>().interactable = true;
+                                removeUnitButton.GetComponent<Button>().interactable = true;
+
+                                up.SelectUnitType(selectedUnitType);
+                                up.placingUnit = false;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (selectedUnit && Input.GetMouseButtonUp(0))
+                    {
+                        selectedUnit = null;
+
+                        lastSelectedUnit = null;
+                        if (selectedUnitParticles)
+                        {
+                            if (selectedUnitParticles.isPlaying)
+                                selectedUnitParticles.Stop();
+                        }
+                        selectedUnitParticles = null;
+
+                        movedUnit = false;
+                    }
+                    else if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+                    {
+                        lastSelectedUnit = null;
+                        if (selectedUnitParticles)
+                        {
+                            if (selectedUnitParticles.isPlaying)
+                                selectedUnitParticles.Stop();
+                        }
+                        selectedUnitParticles = null;
+                    }
+                }
+            }
+            #elif UNITY_ANDROID
             if (Input.touchCount > 0)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
@@ -220,7 +322,7 @@ public class GridPlacement : MonoBehaviour
                     }
                 }
             }
-//#endif
+#endif
         }
     }
 
