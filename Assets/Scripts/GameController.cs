@@ -5,9 +5,10 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using GameAnalyticsSDK;
-
+using UnityEngine.Audio;
 public class GameController : MonoBehaviour
 {
+    public AudioMixer mainAudioMixer;
     public int MoneyAmount
     {
         get { return moneyAmount; }
@@ -63,7 +64,7 @@ public class GameController : MonoBehaviour
     public AudioClip[] winAndLooseClips;
     private static AudioClip[] winAndLooseClipsStatic;
     private static bool won;
-
+    private Button pauseBtn;
     private void Start()
     {
         battleStarted = false;
@@ -110,9 +111,12 @@ public class GameController : MonoBehaviour
                     BGImageStatic.sprite = bgImageSpriteStatic;
 
                 won = false;
-                cameraAudioS.clip = winAndLooseClipsStatic[1];
-                cameraAudioS.volume = 0.5f;
-                cameraAudioS.Play();
+                if (cameraAudioS)
+                {
+                    cameraAudioS.clip = winAndLooseClipsStatic[1];
+                    cameraAudioS.volume = 0.5f;
+                    cameraAudioS.Play();
+                }
                 GameAnalytics.NewProgressionEvent(GAProgressionStatus.Fail, Application.version, "Level: " + SceneManager.GetActiveScene().buildIndex.ToString());
             }
             else
@@ -128,8 +132,11 @@ public class GameController : MonoBehaviour
                 battleEndedBtnTextStatic.text = "NEXT";
 
                 won = true;
-                cameraAudioS.clip = winAndLooseClipsStatic[0];
-                cameraAudioS.Play();
+                if (cameraAudioS)
+                {
+                    cameraAudioS.clip = winAndLooseClipsStatic[0];
+                    cameraAudioS.Play();
+                }
                 GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, Application.version, "Level: " + SceneManager.GetActiveScene().buildIndex.ToString());
             }
         }
@@ -190,14 +197,32 @@ public class GameController : MonoBehaviour
     }
     public void StartBattle()
     {
+        pauseBtn.gameObject.SetActive(true);
         battleStarted = true;
         grid.SetActive(false);
-
         OnBattleStarted?.Invoke();        
     }
 
     public void EnterScene()
     {
         enteredScene = true;
+        pauseBtn = GameObject.FindGameObjectWithTag("PauseBtn").GetComponent<Button>();
+        pauseBtn.onClick.AddListener(() => PauseOrUnpause());
+        pauseBtn.gameObject.SetActive(false);
+    }
+
+    public void PauseOrUnpause()
+    {
+        if(Time.timeScale == 1)
+        {
+            Time.timeScale = 0;
+            mainAudioMixer.SetFloat("Volume", -80);
+        }
+        else
+        {
+            Time.timeScale = 1;
+            Camera.main.GetComponent<AudioListener>().enabled = true;
+            mainAudioMixer.SetFloat("Volume", 0);
+        }
     }
 }
