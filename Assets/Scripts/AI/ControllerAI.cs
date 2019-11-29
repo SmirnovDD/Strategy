@@ -121,7 +121,7 @@ public class ControllerAI : MonoBehaviour
             dist = agent.remainingDistance;
         }
 
-        if ((dist >= agent.stoppingDistance || targetSwitched) && canChangeTarget)
+        if ((dist >= agent.stoppingDistance || targetSwitched) && canChangeTarget && unitType != UnitType.archer)
         {
             MoveToTarget();
             targetSwitched = false;
