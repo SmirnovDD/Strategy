@@ -5798,6 +5798,31 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9124139023074471531, guid: ff630c5c3c224fc449be00a445ddc3e9,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.6999512
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373076305568711902, guid: ff630c5c3c224fc449be00a445ddc3e9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373076305568711902, guid: ff630c5c3c224fc449be00a445ddc3e9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1687258587}
+    - target: {fileID: 5373076305568711902, guid: ff630c5c3c224fc449be00a445ddc3e9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PauseOrUnpause
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373076305568711902, guid: ff630c5c3c224fc449be00a445ddc3e9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff630c5c3c224fc449be00a445ddc3e9, type: 3}
 --- !u!114 &6282872877923792309 stripped
