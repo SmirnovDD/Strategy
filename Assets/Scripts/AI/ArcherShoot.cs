@@ -15,10 +15,13 @@ public class ArcherShoot : MonoBehaviour
         GameObject newArrow;
         if (enemyTransform)
         {
-            if(Vector3.Distance(enemyTransform.position, shootPoint.position) > 20)
-                newArrow = Instantiate(arrowPrefab, shootPoint.transform.position, Quaternion.LookRotation((enemyTransform.position + Vector3.up * 4f) - shootPoint.position));
+            if (Vector3.Distance(enemyTransform.position, shootPoint.position) > 15)
+                newArrow = Instantiate(arrowPrefab, shootPoint.transform.position, Quaternion.LookRotation((enemyTransform.position + Vector3.up * 3f) - shootPoint.position));
             else if (Vector3.Distance(enemyTransform.position, shootPoint.position) > 10)
-                newArrow = Instantiate(arrowPrefab, shootPoint.transform.position, Quaternion.LookRotation((enemyTransform.position + Vector3.up * 2f) - shootPoint.position));
+            {
+                newArrow = Instantiate(arrowPrefab, shootPoint.transform.position, Quaternion.LookRotation((enemyTransform.position + Vector3.up * 2.1f) - shootPoint.position));
+                Debug.Log(Vector3.Distance(enemyTransform.position, shootPoint.position));
+            }
             else
                 newArrow = Instantiate(arrowPrefab, shootPoint.transform.position, Quaternion.LookRotation((enemyTransform.position + Vector3.up * 1.1f) - shootPoint.position));
         }

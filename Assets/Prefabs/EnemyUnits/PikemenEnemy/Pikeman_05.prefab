@@ -179,7 +179,7 @@ MonoBehaviour:
   horseMan: 0
   unitRagdoll: {fileID: 1097113503161083338, guid: f0dc2c503ff6bc14c9231dfa512ce31e,
     type: 3}
-  startingHP: 130
+  startingHP: 140
 --- !u!114 &3537278225428002908
 MonoBehaviour:
   m_ObjectHideFlags: 0

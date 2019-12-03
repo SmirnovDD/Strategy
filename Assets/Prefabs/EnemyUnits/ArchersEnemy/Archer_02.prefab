@@ -438,7 +438,7 @@ MonoBehaviour:
   horseMan: 0
   unitRagdoll: {fileID: 1803284675935750789, guid: 4866861d4fe5fb148bd72030d65f0280,
     type: 3}
-  startingHP: 60
+  startingHP: 70
 --- !u!114 &5164793142167163615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -493,7 +493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2646253801d6414479bc4680b3e0de4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 40
+  damage: 30
   arrowPrefab: {fileID: 1723045615479757360, guid: c065851620e629a4a95b2302510bb5aa,
     type: 3}
   shootPoint: {fileID: 5164793142354263999}

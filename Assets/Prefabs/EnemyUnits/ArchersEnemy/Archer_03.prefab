@@ -211,7 +211,7 @@ MonoBehaviour:
   horseMan: 0
   unitRagdoll: {fileID: 607279253753359831, guid: 49ec1be423bfaa5498e88f6c3a2650b2,
     type: 3}
-  startingHP: 70
+  startingHP: 80
 --- !u!114 &7920009818506024308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,7 +228,7 @@ MonoBehaviour:
   isPlayerUnit: 0
   targetTr: {fileID: 0}
   anim: {fileID: 5051123401684566096}
-  damage: 30
+  damage: 35
   moveAndAttackClips:
   - {fileID: 8300000, guid: a2539a3524f9ada44b46cda2306e25fc, type: 3}
   - {fileID: 8300000, guid: b6ecabf6421b21e44b0812423ea009cc, type: 3}
@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2646253801d6414479bc4680b3e0de4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 45
+  damage: 35
   arrowPrefab: {fileID: 1723045615479757360, guid: c065851620e629a4a95b2302510bb5aa,
     type: 3}
   shootPoint: {fileID: 7920009818426914836}

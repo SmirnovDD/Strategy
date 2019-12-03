@@ -178,7 +178,7 @@ public class ControllerAI : MonoBehaviour
             if (attackedUnitHealth)
             {
                 if (unitType == UnitType.pikeman && attackedUnitHealth.horseMan)
-                    DealDamageToEnemy.DealDamage(attackedUnitHealth, damage * 1.2f);
+                    DealDamageToEnemy.DealDamage(attackedUnitHealth, damage * 1.5f);
                 else
                     DealDamageToEnemy.DealDamage(attackedUnitHealth, damage);
 

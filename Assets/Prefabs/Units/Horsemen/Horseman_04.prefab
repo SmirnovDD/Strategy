@@ -204,7 +204,7 @@ MonoBehaviour:
   isPlayerUnit: 1
   targetTr: {fileID: 0}
   anim: {fileID: 5709414136069931630}
-  damage: 60
+  damage: 70
   moveAndAttackClips:
   - {fileID: 8300000, guid: 56b4ec04825611b43b57a5f27c50f72b, type: 3}
   - {fileID: 8300000, guid: 81c20fb2047214b419fe3283802e90c3, type: 3}
@@ -223,7 +223,7 @@ MonoBehaviour:
   horseMan: 1
   unitRagdoll: {fileID: 690419014031341230, guid: 8e5c2db94adf43f4880351098f252bc0,
     type: 3}
-  startingHP: 140
+  startingHP: 165
 --- !u!114 &-7654057381353122995
 MonoBehaviour:
   m_ObjectHideFlags: 0

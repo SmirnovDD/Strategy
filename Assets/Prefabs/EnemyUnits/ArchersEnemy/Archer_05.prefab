@@ -895,7 +895,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2646253801d6414479bc4680b3e0de4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 60
+  damage: 45
   arrowPrefab: {fileID: 1723045615479757360, guid: c065851620e629a4a95b2302510bb5aa,
     type: 3}
   shootPoint: {fileID: 1085412693668268239}
