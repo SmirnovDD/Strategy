@@ -9,6 +9,7 @@ using UnityEngine.Audio;
 public class GameController : MonoBehaviour
 {
     public AudioMixer mainAudioMixer;
+
     public int MoneyAmount
     {
         get { return moneyAmount; }
@@ -65,6 +66,15 @@ public class GameController : MonoBehaviour
     private static AudioClip[] winAndLooseClipsStatic;
     private static bool won;
     private Button pauseBtn;
+
+    private int levelReached;
+
+    private void Awake()
+    {
+        levelReached = PlayerPrefs.GetInt("levelReached", 0);
+        if(SceneManager.GetActiveScene().buildIndex == 0 && levelReached != 59 && levelReached != 0)
+            SceneManager.LoadScene(levelReached);
+    }
     private void Start()
     {
         battleStarted = false;
@@ -80,7 +90,6 @@ public class GameController : MonoBehaviour
 
         GameAnalytics.Initialize();
         GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, Application.version, "Level: " + SceneManager.GetActiveScene().buildIndex.ToString());
-
     }
     public static bool BattleEnded
     {
@@ -132,6 +141,10 @@ public class GameController : MonoBehaviour
                 battleEndedBtnTextStatic.text = "NEXT";
 
                 won = true;
+
+                if (SceneManager.GetActiveScene().buildIndex < 59)
+                    PlayerPrefs.SetInt("levelReached", SceneManager.GetActiveScene().buildIndex + 1);
+
                 if (cameraAudioS)
                 {
                     cameraAudioS.clip = winAndLooseClipsStatic[0];
@@ -160,8 +173,9 @@ public class GameController : MonoBehaviour
 
         if (SceneManager.GetActiveScene().buildIndex == 0 && loadPreviousLevelBtn)
             loadPreviousLevelBtn.gameObject.SetActive(false);
-        if (SceneManager.GetActiveScene().buildIndex == 59 && loadNextLevelBtn) //TEMP
+        if ((SceneManager.GetActiveScene().buildIndex == 59 || levelReached == SceneManager.GetActiveScene().buildIndex) && loadNextLevelBtn) //TEMP        
             loadNextLevelBtn.gameObject.SetActive(false);
+        
 
             battleStarted = false;
         battleEnded = false;
